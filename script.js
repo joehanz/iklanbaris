@@ -342,7 +342,7 @@ class="card-btn"
 href="https://wa.me/${wa}"
 target="_blank">
 
-Chat WhatsApp
+Chat PengIklan
 
 </a>
 
