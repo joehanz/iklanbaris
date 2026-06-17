@@ -1421,3 +1421,30 @@ overflow-x:hidden;
 
 }
 
+
+.ads-slot{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:20px 0;
+}
+
+.ads-slot a{
+  display:inline-block;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ads-slot a:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+.ads-slot img{
+  display:block;
+  width:300px;
+  height:300px;
+  object-fit:cover;
+}
