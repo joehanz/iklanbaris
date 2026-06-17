@@ -1,262 +1,247 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Iklan Baris Online</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#0f172a;
-color:#fff;
-}
+<meta name="description" content="Pasang iklan gratis tanpa login. Marketplace lokal sederhana berbasis GitHub Pages dan Google Sheets.">
 
-header{
-padding:20px;
-text-align:center;
-background:#111827;
-position:sticky;
-top:0;
-z-index:99;
-}
+<link rel="stylesheet" href="style.css">
 
-header h1{
-margin:0;
-font-size:20px;
-}
-
-.search{
-margin-top:10px;
-}
-
-.search input{
-width:90%;
-max-width:500px;
-padding:10px;
-border:none;
-outline:none;
-border-radius:8px;
-}
-
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
-padding:20px;
-}
-
-.card{
-background:#1e293b;
-padding:15px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,.3);
-}
-
-.card h3{
-margin:0 0 10px;
-font-size:16px;
-}
-
-.card p{
-font-size:14px;
-opacity:.9;
-}
-
-.price{
-margin:10px 0;
-font-weight:bold;
-color:#22c55e;
-font-size:18px;
-}
-
-.btn{
-display:inline-block;
-padding:8px 12px;
-background:#22c55e;
-color:#000;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-font-size:13px;
-}
-
-.fab{
-position:fixed;
-right:20px;
-bottom:20px;
-background:#3b82f6;
-color:#fff;
-padding:15px 20px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(0,0,0,.4);
-}
-
-.loading{
-padding:30px;
-text-align:center;
-}
-
-footer{
-padding:20px;
-text-align:center;
-font-size:12px;
-opacity:.7;
-}
-</style>
 </head>
-
 <body>
 
-<header>
-<h1>📢 Iklan Baris Online</h1>
+<!-- NAVBAR -->
 
-<div class="search">
-<input type="text" id="searchInput" placeholder="Cari iklan...">
+<nav class="navbar">
+
+<div class="logo-area">
+
+<div class="logo-icon">📢</div>
+
+<div class="logo-text">
+<h1>Iklan Baris</h1>
+<span>Marketplace Gratis</span>
 </div>
 
-</header>
+</div>
 
-<div class="container" id="listIklan">
+<button id="menuBtn" class="menu-btn">
 
-<div class="loading">
-Memuat iklan...
+<span></span>
+<span></span>
+<span></span>
+
+</button>
+
+</nav>
+
+<!-- MOBILE MENU -->
+
+<div id="mobileMenu" class="mobile-menu">
+
+<div class="mobile-menu-content">
+
+<a href="#">Beranda</a>
+
+<a href="pasang.html">Pasang Iklan</a>
+
+<a href="#">Kategori</a>
+
+<a href="#">Tentang</a>
+
+<a href="#">Kontak</a>
+
 </div>
 
 </div>
 
-<a class="fab" href="pasang.html">
-+ Pasang Iklan
-</a>
+<!-- HERO -->
 
-<footer>
-© 2026 Iklan Baris Online
-</footer>
+<section class="hero">
 
-<script>
+<div class="hero-content">
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbxNGhXnknPcj-9sAPNVlI8qip35R-ftTbbVCgV5g6LUdSwruMqcPHl_ug69J9AGhv3x/exec";
-
-let semuaIklan = [];
-
-async function loadIklan(){
-
-try{
-
-const res = await fetch(API_URL);
-const data = await res.json();
-
-semuaIklan = data.reverse();
-
-renderIklan(semuaIklan);
-
-}catch(err){
-
-console.error(err);
-
-document.getElementById("listIklan").innerHTML =
-"<div class='loading'>Gagal memuat iklan</div>";
-
-}
-
-}
-
-function renderIklan(data){
-
-const list = document.getElementById("listIklan");
-
-if(data.length===0){
-
-list.innerHTML =
-"<div class='loading'>Belum ada iklan</div>";
-
-return;
-
-}
-
-list.innerHTML = "";
-
-data.forEach(item=>{
-
-let wa = String(item.wa || "")
-.replace(/\D/g,'');
-
-if(wa.startsWith("0")){
-wa = "62" + wa.substring(1);
-}
-
-list.innerHTML += `
-<div class="card">
-
-<h3>${item.judul || "-"}</h3>
-
-<p>${item.deskripsi || "-"}</p>
-
-<div class="price">
-Rp ${Number(item.harga || 0).toLocaleString("id-ID")}
-</div>
+<h2>Pasang Iklan Gratis Tanpa Login</h2>
 
 <p>
-Kategori:
-<b>${item.kategori || "-"}</b>
+Marketplace sederhana untuk jual beli produk,
+jasa, properti dan kebutuhan lokal.
 </p>
 
-<a
-class="btn"
-href="https://wa.me/${wa}"
-target="_blank">
-Chat WhatsApp
+<a href="pasang.html" class="hero-btn">
+Pasang Iklan Sekarang
 </a>
 
 </div>
-`;
 
-});
+</section>
 
-}
+<!-- FILTER -->
 
-document
-.getElementById("searchInput")
-.addEventListener("input",function(){
+<section class="filter-area">
 
-const keyword =
-this.value.toLowerCase();
+<input
+type="text"
+id="searchInput"
+placeholder="Cari produk, jasa, properti..."
+>
 
-const hasil =
-semuaIklan.filter(item=>{
+<select id="kategoriFilter">
 
-return (
-(item.judul || "")
-.toLowerCase()
-.includes(keyword)
+<option value="">Semua Kategori</option>
 
-||
+<option value="produk">Produk</option>
 
-(item.deskripsi || "")
-.toLowerCase()
-.includes(keyword)
+<option value="jasa">Jasa</option>
 
-||
+<option value="properti">Properti</option>
 
-(item.kategori || "")
-.toLowerCase()
-.includes(keyword)
+<option value="otomotif">Otomotif</option>
 
-);
+<option value="elektronik">Elektronik</option>
 
-});
+<option value="lainnya">Lainnya</option>
 
-renderIklan(hasil);
+</select>
 
-});
+</section>
 
-loadIklan();
+<!-- MAIN -->
 
-</script>
+<main class="layout">
+
+<!-- LEFT ADS -->
+
+<aside class="sidebar left-sidebar">
+
+<div class="sticky-ads">
+
+<div class="ads-box">
+300 x 300
+</div>
+
+<div class="ads-box">
+300 x 300
+</div>
+
+<div class="ads-box">
+300 x 300
+</div>
+
+</div>
+
+</aside>
+
+<!-- CONTENT -->
+
+<section class="content">
+
+<div class="section-title">
+
+<h2>Iklan Terbaru</h2>
+
+<p>
+Data otomatis dari Google Sheets
+</p>
+
+</div>
+
+<div id="loadingBox" class="loading-box">
+
+Memuat iklan...
+
+</div>
+
+<div id="listIklan" class="iklan-grid">
+
+<!-- AUTO GENERATED -->
+
+</div>
+
+</section>
+
+<!-- RIGHT ADS -->
+
+<aside class="sidebar right-sidebar">
+
+<div class="sticky-ads">
+
+<div class="ads-box">
+300 x 300
+</div>
+
+<div class="ads-box">
+300 x 300
+</div>
+
+<div class="ads-box">
+300 x 300
+</div>
+
+</div>
+
+</aside>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="footer-grid">
+
+<div class="footer-box">
+
+<h3>Tentang</h3>
+
+<p>
+Platform iklan baris gratis berbasis
+GitHub Pages dan Google Sheets.
+</p>
+
+</div>
+
+<div class="footer-box">
+
+<h3>Kategori</h3>
+
+<ul>
+
+<li>Produk</li>
+<li>Jasa</li>
+<li>Properti</li>
+<li>Otomotif</li>
+
+</ul>
+
+</div>
+
+<div class="footer-box">
+
+<h3>Kontak</h3>
+
+<p>
+Email:<br>
+admin@email.com
+</p>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 Iklan Baris Online
+
+</div>
+
+</footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
