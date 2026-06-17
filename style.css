@@ -1,53 +1,67 @@
+/* =====================================
+   RESET
+===================================== */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
 
-:root{
-
---primary:#2563eb;
---primary2:#0ea5e9;
-
---bg:#f5f7fb;
-
---card:#ffffff;
-
---text:#1f2937;
-
---muted:#6b7280;
-
---border:#e5e7eb;
-
---success:#22c55e;
-
---shadow:
-0 10px 30px rgba(0,0,0,.08);
-
+html,
+body{
+width:100%;
+overflow-x:hidden;
 }
 
 body{
 
 font-family:
-Segoe UI,
-Arial,
+'Inter',
 sans-serif;
 
-background:var(--bg);
+background:#f4f7fb;
 
-color:var(--text);
+color:#1f2937;
 
 line-height:1.6;
 
 }
 
-/* NAVBAR */
+/* =====================================
+   ROOT
+===================================== */
 
-.navbar{
+:root{
 
-height:70px;
+--primary:#2563eb;
+--primary2:#3b82f6;
 
-background:#fff;
+--success:#22c55e;
+
+--bg:#f4f7fb;
+
+--card:#ffffff;
+
+--border:#e5e7eb;
+
+--text:#1f2937;
+
+--muted:#6b7280;
+
+--shadow:
+0 12px 30px rgba(0,0,0,.08);
+
+--shadow-hover:
+0 18px 40px rgba(0,0,0,.12);
+
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.header{
 
 position:sticky;
 
@@ -55,22 +69,43 @@ top:0;
 
 z-index:999;
 
+background:#fff;
+
+border-bottom:
+1px solid var(--border);
+
+box-shadow:
+0 2px 20px rgba(0,0,0,.04);
+
+}
+
+.header-inner{
+
+max-width:1600px;
+
+margin:auto;
+
+padding:
+
+15px
+20px;
+
 display:flex;
 
 align-items:center;
 
-justify-content:space-between;
+justify-content:
+space-between;
 
-padding:0 20px;
-
-border-bottom:1px solid var(--border);
-
-box-shadow:
-0 2px 15px rgba(0,0,0,.05);
+gap:20px;
 
 }
 
-.logo-area{
+/* =====================================
+   BRAND
+===================================== */
+
+.brand{
 
 display:flex;
 
@@ -78,37 +113,200 @@ align-items:center;
 
 gap:12px;
 
-}
-
-.logo-icon{
-
-font-size:28px;
+flex-shrink:0;
 
 }
 
-.logo-text h1{
+.brand-icon{
 
-font-size:20px;
+font-size:32px;
+
+}
+
+.brand-text h1{
+
+font-size:22px;
+
+font-weight:800;
 
 line-height:1;
 
 }
 
-.logo-text span{
+.brand-text p{
 
 font-size:12px;
 
 color:var(--muted);
 
+margin-top:4px;
+
 }
 
-/* MENU BUTTON */
+/* =====================================
+   HEADER TOOLS
+===================================== */
+
+.header-tools{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+width:100%;
+
+max-width:700px;
+
+justify-content:flex-end;
+
+}
+
+/* =====================================
+   SEARCH
+===================================== */
+
+.search-wrap{
+
+position:relative;
+
+flex:1;
+
+}
+
+.search-wrap input{
+
+width:100%;
+
+height:50px;
+
+padding:
+0 18px;
+
+border:
+1px solid var(--border);
+
+border-radius:14px;
+
+background:#fff;
+
+font-size:15px;
+
+outline:none;
+
+transition:.3s;
+
+box-shadow:
+0 2px 10px rgba(0,0,0,.03);
+
+}
+
+.search-wrap input:focus{
+
+border-color:
+var(--primary);
+
+box-shadow:
+0 0 0 4px
+rgba(37,99,235,.12);
+
+}
+
+/* =====================================
+   SUGGESTION BOX
+===================================== */
+
+.suggestion-box{
+
+position:absolute;
+
+left:0;
+
+top:58px;
+
+width:100%;
+
+background:#fff;
+
+border-radius:14px;
+
+box-shadow:
+var(--shadow);
+
+display:none;
+
+overflow:hidden;
+
+z-index:999;
+
+}
+
+.suggestion-item{
+
+padding:
+12px 15px;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+.suggestion-item:hover{
+
+background:#eff6ff;
+
+}
+
+/* =====================================
+   CATEGORY
+===================================== */
+
+#kategoriFilter{
+
+width:220px;
+
+height:50px;
+
+border:
+1px solid var(--border);
+
+border-radius:14px;
+
+background:#fff;
+
+padding:
+0 15px;
+
+font-size:15px;
+
+outline:none;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+#kategoriFilter:focus{
+
+border-color:
+var(--primary);
+
+}
+
+/* =====================================
+   BURGER
+===================================== */
 
 .menu-btn{
 
-width:45px;
+display:none;
 
-height:45px;
+width:48px;
+
+height:48px;
 
 border:none;
 
@@ -116,35 +314,39 @@ background:none;
 
 cursor:pointer;
 
-display:flex;
+padding:0;
 
-flex-direction:column;
-
-justify-content:center;
-
-gap:5px;
+position:relative;
 
 }
 
 .menu-btn span{
 
+display:block;
+
+width:28px;
+
 height:3px;
 
-border-radius:5px;
-
 background:#111;
+
+margin:6px auto;
+
+border-radius:10px;
 
 transition:.35s;
 
 }
 
-/* MOBILE MENU */
+/* =====================================
+   MOBILE MENU
+===================================== */
 
 .mobile-menu{
 
 position:fixed;
 
-top:70px;
+top:0;
 
 right:-320px;
 
@@ -154,12 +356,14 @@ height:100vh;
 
 background:#fff;
 
-transition:.4s;
-
 z-index:998;
 
+padding-top:90px;
+
 box-shadow:
--5px 0 20px rgba(0,0,0,.08);
+-10px 0 40px rgba(0,0,0,.12);
+
+transition:.35s;
 
 }
 
@@ -169,34 +373,48 @@ right:0;
 
 }
 
-.mobile-menu-content{
+.mobile-menu a{
 
-display:flex;
+display:block;
 
-flex-direction:column;
-
-padding:20px;
-
-}
-
-.mobile-menu-content a{
-
-padding:15px;
+padding:
+16px 24px;
 
 text-decoration:none;
 
 color:#111;
 
+font-weight:600;
+
 border-bottom:
 1px solid var(--border);
 
+transition:.2s;
+
 }
 
-/* HERO */
+.mobile-menu a:hover{
 
-.hero{
+background:#f8fafc;
 
-padding:60px 20px;
+}
+/* =====================================
+   HERO MINI
+===================================== */
+
+.hero-mini{
+
+max-width:1600px;
+
+margin:
+25px auto 0;
+
+padding:
+0 20px;
+
+}
+
+.hero-box{
 
 background:
 linear-gradient(
@@ -207,25 +425,34 @@ var(--primary2)
 
 color:#fff;
 
-text-align:center;
+padding:
+40px;
+
+border-radius:24px;
+
+box-shadow:
+0 20px 50px
+rgba(37,99,235,.18);
 
 }
 
-.hero h2{
+.hero-box h2{
 
-font-size:36px;
+font-size:34px;
 
-margin-bottom:15px;
+font-weight:800;
+
+margin-bottom:12px;
 
 }
 
-.hero p{
+.hero-box p{
 
-max-width:700px;
-
-margin:auto;
+font-size:15px;
 
 opacity:.95;
+
+max-width:700px;
 
 }
 
@@ -233,77 +460,62 @@ opacity:.95;
 
 display:inline-block;
 
-margin-top:25px;
+margin-top:20px;
 
-padding:14px 24px;
+padding:
+12px 22px;
 
 background:#fff;
 
 color:var(--primary);
 
-font-weight:bold;
-
 text-decoration:none;
+
+font-weight:700;
 
 border-radius:12px;
 
+transition:.3s;
+
 }
 
-/* FILTER */
+.hero-btn:hover{
 
-.filter-area{
+transform:
+translateY(-2px);
 
-display:flex;
+}
 
-gap:15px;
+/* =====================================
+   MAIN WRAPPER
+===================================== */
 
-padding:20px;
+.main-wrapper{
 
 max-width:1600px;
 
-margin:auto;
+margin:
+25px auto;
 
-}
-
-.filter-area input,
-.filter-area select{
-
-padding:12px;
-
-border:1px solid var(--border);
-
-border-radius:10px;
-
-background:#fff;
-
-}
-
-.filter-area input{
-
-flex:1;
-
-}
-
-/* LAYOUT */
-
-.layout{
-
-max-width:1600px;
-
-margin:auto;
-
-padding:20px;
+padding:
+0 20px;
 
 display:grid;
 
 grid-template-columns:
-25% 50% 25%;
+280px
+minmax(0,1fr)
+280px;
 
 gap:20px;
 
+align-items:start;
+
 }
 
-/* SIDEBAR */
+/* =====================================
+   SIDEBAR
+===================================== */
 
 .sidebar{
 
@@ -311,29 +523,45 @@ min-width:0;
 
 }
 
-.sticky-ads{
-
-position:sticky;
-
-top:90px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:20px;
-
-}
-
-.ads-box{
-
-height:300px;
+.sidebar-card{
 
 background:#fff;
 
-border-radius:15px;
+border-radius:22px;
 
-border:1px solid var(--border);
+padding:15px;
+
+margin-bottom:20px;
+
+box-shadow:
+var(--shadow);
+
+border:
+1px solid var(--border);
+
+}
+
+/* =====================================
+   STICKY ADS
+===================================== */
+
+.sidebar{
+
+position:sticky;
+
+top:95px;
+
+}
+
+.ads-slot{
+
+height:300px;
+
+border-radius:18px;
+
+border:
+2px dashed
+#cbd5e1;
 
 display:flex;
 
@@ -341,15 +569,24 @@ align-items:center;
 
 justify-content:center;
 
-font-weight:bold;
+font-weight:700;
 
-color:#999;
+font-size:18px;
 
-box-shadow:var(--shadow);
+color:#94a3b8;
+
+background:
+linear-gradient(
+180deg,
+#fff,
+#f8fafc
+);
 
 }
 
-/* CONTENT */
+/* =====================================
+   CONTENT
+===================================== */
 
 .content{
 
@@ -357,66 +594,104 @@ min-width:0;
 
 }
 
-.section-title{
-
-margin-bottom:20px;
-
-}
-
-.section-title h2{
-
-font-size:28px;
-
-}
-
-.section-title p{
-
-color:var(--muted);
-
-}
-
-.loading-box{
+.content-box{
 
 background:#fff;
 
 padding:25px;
 
-border-radius:15px;
+border-radius:24px;
 
-box-shadow:var(--shadow);
+box-shadow:
+var(--shadow);
 
-text-align:center;
+border:
+1px solid var(--border);
 
 }
 
-/* GRID IKLAN */
+/* =====================================
+   SECTION HEADER
+===================================== */
+
+.section-header{
+
+margin-bottom:25px;
+
+}
+
+.section-header h2{
+
+font-size:30px;
+
+font-weight:800;
+
+color:#111827;
+
+}
+
+.section-header p{
+
+margin-top:6px;
+
+color:var(--muted);
+
+}
+
+/* =====================================
+   LOADING
+===================================== */
+
+.loading-box{
+
+padding:
+40px;
+
+text-align:center;
+
+color:var(--muted);
+
+font-weight:600;
+
+}
+
+/* =====================================
+   GRID IKLAN
+===================================== */
 
 .iklan-grid{
 
 display:grid;
 
 grid-template-columns:
-repeat(2,1fr);
+repeat(2,minmax(0,1fr));
 
 gap:20px;
 
 }
 
-/* CARD */
+/* =====================================
+   CARD IKLAN
+===================================== */
 
 .card{
 
 background:#fff;
 
-border-radius:18px;
+border-radius:22px;
 
-padding:18px;
+padding:20px;
 
-box-shadow:var(--shadow);
+border:
+1px solid var(--border);
 
-border:1px solid var(--border);
+box-shadow:
+0 5px 15px
+rgba(0,0,0,.04);
 
 transition:.3s;
+
+overflow:hidden;
 
 }
 
@@ -426,96 +701,277 @@ transform:
 translateY(-6px);
 
 box-shadow:
-0 20px 40px rgba(0,0,0,.12);
+var(--shadow-hover);
 
 }
 
-.card h3{
-
-font-size:20px;
-
-margin-bottom:10px;
-
-}
-
-.card p{
-
-color:#555;
-
-margin-bottom:10px;
-
-}
+/* =====================================
+   BADGE KATEGORI
+===================================== */
 
 .card-badge{
 
-display:inline-block;
+display:inline-flex;
 
-padding:6px 10px;
+align-items:center;
 
-border-radius:20px;
+padding:
+7px 12px;
+
+border-radius:50px;
+
+font-size:12px;
+
+font-weight:700;
+
+text-transform:uppercase;
+
+letter-spacing:.5px;
 
 background:#dbeafe;
 
 color:#1d4ed8;
 
-font-size:12px;
-
-font-weight:bold;
-
-margin-bottom:12px;
+margin-bottom:14px;
 
 }
 
-.card-user{
+/* =====================================
+   JUDUL IKLAN
+===================================== */
 
-font-size:13px;
+.card h3{
 
-color:var(--muted);
+font-size:21px;
 
-margin-bottom:10px;
+font-weight:800;
+
+line-height:1.35;
+
+margin-bottom:14px;
+
+color:#111827;
 
 }
+
+/* =====================================
+   HARGA
+===================================== */
 
 .card-price{
 
-font-size:24px;
+font-size:28px;
 
-font-weight:bold;
+font-weight:800;
 
 color:var(--success);
 
-margin:15px 0;
+margin-bottom:14px;
 
 }
 
+/* =====================================
+   USER
+===================================== */
+
+.card-user{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#475569;
+
+margin-bottom:8px;
+
+}
+
+/* =====================================
+   TIME
+===================================== */
+
+.card-time{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+font-size:13px;
+
+color:#64748b;
+
+margin-bottom:15px;
+
+}
+
+/* =====================================
+   DIVIDER
+===================================== */
+
+.card-divider{
+
+height:1px;
+
+background:#e5e7eb;
+
+margin:
+15px 0;
+
+}
+
+/* =====================================
+   DESCRIPTION
+===================================== */
+
+.card-desc{
+
+font-size:14px;
+
+line-height:1.7;
+
+color:#475569;
+
+margin-bottom:18px;
+
+word-break:break-word;
+
+}
+
+/* =====================================
+   BUTTON WA
+===================================== */
+
 .card-btn{
 
-display:inline-block;
+display:flex;
 
-padding:10px 16px;
+align-items:center;
 
-background:var(--success);
+justify-content:center;
+
+width:100%;
+
+height:48px;
+
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#16a34a
+);
 
 color:#fff;
 
 text-decoration:none;
 
-border-radius:10px;
+font-weight:700;
 
-font-weight:bold;
+border-radius:14px;
+
+transition:.3s;
 
 }
 
-/* FOOTER */
+.card-btn:hover{
 
-.footer{
+transform:
+translateY(-2px);
 
-margin-top:50px;
+}
+
+/* =====================================
+   EMPTY
+===================================== */
+
+.empty-box{
+
+padding:
+50px 20px;
+
+text-align:center;
+
+color:var(--muted);
+
+font-size:15px;
+
+}
+/* =====================================
+   PAGINATION
+===================================== */
+
+.pagination{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:8px;
+
+margin-top:35px;
+
+flex-wrap:wrap;
+
+}
+
+.pagination button{
+
+width:42px;
+
+height:42px;
+
+border:none;
+
+border-radius:12px;
 
 background:#fff;
 
-border-top:
-1px solid var(--border);
+cursor:pointer;
+
+font-weight:700;
+
+box-shadow:
+0 3px 10px rgba(0,0,0,.08);
+
+transition:.25s;
+
+}
+
+.pagination button:hover{
+
+transform:
+translateY(-2px);
+
+}
+
+.pagination button.active{
+
+background:
+var(--primary);
+
+color:#fff;
+
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.footer{
+
+margin-top:40px;
+
+padding:
+0 20px 30px;
 
 }
 
@@ -525,93 +981,126 @@ max-width:1600px;
 
 margin:auto;
 
-padding:40px 20px;
-
 display:grid;
 
 grid-template-columns:
 repeat(3,1fr);
 
-gap:30px;
+gap:20px;
 
 }
 
-.footer-box h3{
+.footer-card{
 
-margin-bottom:10px;
+background:#fff;
+
+padding:25px;
+
+border-radius:22px;
+
+border:
+1px solid var(--border);
+
+box-shadow:
+var(--shadow);
 
 }
 
-.footer-box p,
-.footer-box li{
+.footer-card h3{
+
+font-size:20px;
+
+margin-bottom:12px;
+
+font-weight:800;
+
+}
+
+.footer-card p{
 
 color:var(--muted);
+
+font-size:14px;
+
+line-height:1.7;
+
+}
+
+.footer-card ul{
 
 list-style:none;
 
 }
 
-.copyright{
+.footer-card li{
 
-text-align:center;
-
-padding:20px;
-
-border-top:
-1px solid var(--border);
+padding:6px 0;
 
 color:var(--muted);
 
 }
 
-/* TABLET */
+.copyright{
 
-@media(max-width:1100px){
+max-width:1600px;
 
-.layout{
+margin:
+20px auto 0;
+
+text-align:center;
+
+font-size:13px;
+
+color:#64748b;
+
+}
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media(max-width:1200px){
+
+.main-wrapper{
 
 grid-template-columns:
-1fr;
+240px
+minmax(0,1fr)
+240px;
 
 }
 
-.sticky-ads{
-
-position:relative;
-
-top:auto;
-
-}
-
-.iklan-grid{
-
-grid-template-columns:
-1fr 1fr;
-
-}
-
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.hero h2{
+.hero-box h2{
 
 font-size:28px;
 
 }
 
-.filter-area{
+}
 
-flex-direction:column;
+/* =====================================
+   TABLET KECIL
+===================================== */
+
+@media(max-width:992px){
+
+.main-wrapper{
+
+grid-template-columns:
+1fr;
+
+}
+
+.sidebar{
+
+position:static;
 
 }
 
 .iklan-grid{
 
 grid-template-columns:
-1fr;
+repeat(2,minmax(0,1fr));
 
 }
 
@@ -622,22 +1111,313 @@ grid-template-columns:
 
 }
 
-.left-sidebar{
+}
 
-order:1;
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:768px){
+
+.header-inner{
+
+padding:
+14px 15px;
 
 }
 
-.content{
+/* burger muncul */
 
-order:2;
+.menu-btn{
 
-}
-
-.right-sidebar{
-
-order:3;
+display:block;
 
 }
 
+/* desktop tools sembunyi */
+
+.header-tools{
+
+display:none;
+
 }
+
+.brand-text h1{
+
+font-size:18px;
+
+}
+
+.brand-text p{
+
+font-size:11px;
+
+}
+
+/* hero */
+
+.hero-mini{
+
+padding:0 15px;
+
+}
+
+.hero-box{
+
+padding:25px;
+
+border-radius:18px;
+
+}
+
+.hero-box h2{
+
+font-size:24px;
+
+}
+
+.hero-box p{
+
+font-size:14px;
+
+}
+
+.hero-btn{
+
+width:100%;
+
+text-align:center;
+
+}
+
+/* wrapper */
+
+.main-wrapper{
+
+padding:0 15px;
+
+}
+
+/* grid jadi 1 */
+
+.iklan-grid{
+
+grid-template-columns:
+1fr;
+
+}
+
+/* content */
+
+.content-box{
+
+padding:18px;
+
+border-radius:18px;
+
+}
+
+/* card */
+
+.card{
+
+padding:18px;
+
+border-radius:18px;
+
+}
+
+.card h3{
+
+font-size:18px;
+
+}
+
+.card-price{
+
+font-size:24px;
+
+}
+
+/* footer */
+
+.footer{
+
+padding:
+0 15px 25px;
+
+}
+
+}
+
+/* =====================================
+   MOBILE KECIL
+===================================== */
+
+@media(max-width:480px){
+
+.brand-icon{
+
+font-size:26px;
+
+}
+
+.brand-text h1{
+
+font-size:16px;
+
+}
+
+.brand-text p{
+
+display:none;
+
+}
+
+.hero-box h2{
+
+font-size:21px;
+
+}
+
+.hero-box{
+
+padding:20px;
+
+}
+
+.card-price{
+
+font-size:22px;
+
+}
+
+}
+
+/* =====================================
+   MOBILE SEARCH PANEL
+   dipakai nanti oleh JS
+===================================== */
+
+.mobile-search-panel{
+
+display:none;
+
+padding:15px;
+
+background:#fff;
+
+border-bottom:
+1px solid var(--border);
+
+}
+
+.mobile-search-panel input{
+
+width:100%;
+
+height:48px;
+
+padding:
+0 15px;
+
+border:
+1px solid var(--border);
+
+border-radius:14px;
+
+outline:none;
+
+margin-bottom:10px;
+
+}
+
+.mobile-search-panel select{
+
+width:100%;
+
+height:48px;
+
+padding:
+0 15px;
+
+border:
+1px solid var(--border);
+
+border-radius:14px;
+
+outline:none;
+
+}
+
+@media(max-width:768px){
+
+.mobile-search-panel{
+
+display:block;
+
+}
+
+}
+
+/* =====================================
+   SMOOTH
+===================================== */
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+/* =====================================
+   IMAGE READY
+===================================== */
+
+.card img{
+
+width:100%;
+
+display:block;
+
+border-radius:14px;
+
+margin-bottom:14px;
+
+object-fit:cover;
+
+}
+
+/* =====================================
+   PREMIUM EFFECT
+===================================== */
+
+.sidebar-card,
+.content-box,
+.footer-card{
+
+transition:.3s;
+
+}
+
+.sidebar-card:hover,
+.footer-card:hover{
+
+transform:
+translateY(-3px);
+
+}
+
+/* =====================================
+   NO HORIZONTAL SCROLL
+===================================== */
+
+body,
+.main-wrapper,
+.content,
+.sidebar{
+
+overflow-x:hidden;
+
+}
+
