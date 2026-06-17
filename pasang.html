@@ -133,6 +133,32 @@ height:140px;
 resize:vertical;
 }
 
+.textarea-wrap{
+position:relative;
+}
+
+.char-counter{
+
+position:absolute;
+
+right:12px;
+
+bottom:12px;
+
+font-size:12px;
+
+color:#64748b;
+
+background:#fff;
+
+padding:2px 6px;
+
+border-radius:6px;
+
+pointer-events:none;
+
+}
+
 .previewHarga{
 
 margin-top:8px;
@@ -367,9 +393,22 @@ Rp 0
 
 <label>Deskripsi</label>
 
+<div class="textarea-wrap">
+
 <textarea
 id="deskripsi"
+maxlength="500"
 required></textarea>
+
+<div
+class="char-counter"
+id="charCounter">
+
+0/500
+
+</div>
+
+</div>
 
 </div>
 
@@ -424,6 +463,41 @@ document.getElementById(
 const toast =
 document.getElementById(
 "toast"
+);
+
+const deskripsi =
+document.getElementById(
+"deskripsi"
+);
+
+const charCounter =
+document.getElementById(
+"charCounter"
+);
+
+deskripsi.addEventListener(
+"input",
+()=>{
+
+const total =
+deskripsi.value.length;
+
+charCounter.innerHTML =
+`${total}/500`;
+
+if(total > 450){
+
+charCounter.style.color =
+"#dc2626";
+
+}else{
+
+charCounter.style.color =
+"#64748b";
+
+}
+
+}
 );
 
 hargaInput.addEventListener(
