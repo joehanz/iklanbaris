@@ -460,8 +460,7 @@ display:inline-block;
 
 margin-top:20px;
 
-padding:
-12px 22px;
+padding:12px 22px;
 
 background:#fff;
 
@@ -474,6 +473,15 @@ font-weight:700;
 border-radius:12px;
 
 transition:.3s;
+
+position:sticky;
+
+top:85px;
+
+z-index:100;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,.12);
 
 }
 
