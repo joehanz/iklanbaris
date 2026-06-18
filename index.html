@@ -1,485 +1,306 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Iklan Baris Online</title>
+    <meta
+      name="description"
+      content="Marketplace gratis berbasis GitHub Pages dan Google Sheets"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Iklan Baris Online</title>
-<meta name="description" content="Marketplace gratis berbasis GitHub Pages dan Google Sheets">
-<link rel="stylesheet" href="style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
+    <header class="header">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-icon">📢</div>
 
-<!-- HEADER -->
+          <div class="brand-text">
+            <h1>Iklan Baris</h1>
 
-<header class="header">
+            <p>Marketplace Gratis Indonesia</p>
+          </div>
+        </div>
 
-<div class="header-inner">
+        <div class="header-tools">
+          <div class="search-wrap">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Cari iklan..."
+              autocomplete="off"
+            />
 
-<div class="brand">
+            <div id="suggestionBox" class="suggestion-box"></div>
+          </div>
 
-<div class="brand-icon">
-📢
-</div>
+          <select id="kategoriFilter">
+            <option value="">Semua Kategori</option>
 
-<div class="brand-text">
+            <option value="tanah">Tanah</option>
 
-<h1>Iklan Baris</h1>
+            <option value="rumah">Rumah</option>
 
-<p>Marketplace Gratis Indonesia</p>
+            <option value="ruko">Ruko</option>
 
-</div>
+            <option value="kontrakan">Kontrakan</option>
 
-</div>
+            <option value="kos">Kos</option>
 
-<div class="header-tools">
+            <option value="mobil">Mobil</option>
 
-<div class="search-wrap">
+            <option value="motor">Motor</option>
 
-<input
-type="text"
-id="searchInput"
-placeholder="Cari iklan..."
-autocomplete="off"
->
+            <option value="sparepart">Sparepart</option>
 
-<div id="suggestionBox"
-class="suggestion-box">
-</div>
+            <option value="hp">HP</option>
 
-</div>
+            <option value="laptop">Laptop</option>
 
-<select id="kategoriFilter">
+            <option value="komputer">Komputer</option>
 
-<option value="">
-Semua Kategori
-</option>
+            <option value="tv">TV</option>
 
-<option value="tanah">
-Tanah
-</option>
+            <option value="fashion">Fashion</option>
 
-<option value="rumah">
-Rumah
-</option>
+            <option value="makanan">Makanan</option>
 
-<option value="ruko">
-Ruko
-</option>
+            <option value="minuman">Minuman</option>
 
-<option value="kontrakan">
-Kontrakan
-</option>
+            <option value="catering">Catering</option>
 
-<option value="kos">
-Kos
-</option>
+            <option value="ayam">Ayam</option>
 
-<option value="mobil">
-Mobil
-</option>
+            <option value="bebek">Bebek</option>
 
-<option value="motor">
-Motor
-</option>
+            <option value="telur">Telur</option>
 
-<option value="sparepart">
-Sparepart
-</option>
+            <option value="jasa">Jasa</option>
 
-<option value="hp">
-HP
-</option>
+            <option value="arsitek">Arsitek</option>
 
-<option value="laptop">
-Laptop
-</option>
+            <option value="kontraktor">Kontraktor</option>
 
-<option value="komputer">
-Komputer
-</option>
+            <option value="desain">Desain</option>
 
-<option value="tv">
-TV
-</option>
+            <option value="servis">Servis</option>
 
-<option value="fashion">
-Fashion
-</option>
+            <option value="lowongan">Lowongan Kerja</option>
 
-<option value="makanan">
-Makanan
-</option>
+            <option value="lainnya">Lainnya</option>
+          </select>
+        </div>
 
-<option value="minuman">
-Minuman
-</option>
+        <button id="menuBtn" class="menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="#"> Beranda </a>
 
-<option value="catering">
-Catering
-</option>
+      <a href="pasang.html"> Pasang Iklan </a>
 
-<option value="ayam">
-Ayam
-</option>
+      <a href="#"> Kategori </a>
 
-<option value="bebek">
-Bebek
-</option>
+      <a href="#"> Kontak </a>
+    </div>
+
+    <!-- HERO -->
+
+    <section class="hero-mini">
+      <div class="hero-box">
+        <h2>Pasang Iklan Baris Gratis Tanpa Daftar</h2>
+
+        <p>
+          Jual barang bekas, properti, kendaraan, jasa, lowongan kerja, hingga
+          kebutuhan harian dengan mudah. Cukup isi formulir dan iklan langsung
+          tayang tanpa registrasi, tanpa biaya, dan tanpa proses yang rumit.
+        </p>
+
+        <a href="pasang.html" class="hero-btn"> Pasang Iklan </a>
+      </div>
+    </section>
 
-<option value="telur">
-Telur
-</option>
-
-<option value="jasa">
-Jasa
-</option>
-
-<option value="arsitek">
-Arsitek
-</option>
-
-<option value="kontraktor">
-Kontraktor
-</option>
-
-<option value="desain">
-Desain
-</option>
-
-<option value="servis">
-Servis
-</option>
-
-<option value="lowongan">
-Lowongan Kerja
-</option>
-
-<option value="lainnya">
-Lainnya
-</option>
-
-</select>
-
-</div>
-
-<button
-id="menuBtn"
-class="menu-btn">
-
-<span></span>
-<span></span>
-<span></span>
-
-</button>
-
-</div>
-
-</header>
-
-<!-- MOBILE MENU -->
-
-<div
-id="mobileMenu"
-class="mobile-menu">
-
-<a href="#">
-Beranda
-</a>
-
-<a href="pasang.html">
-Pasang Iklan
-</a>
-
-<a href="#">
-Kategori
-</a>
-
-<a href="#">
-Kontak
-</a>
-
-</div>
-
-<!-- HERO -->
-
-<section class="hero-mini">
-
-<div class="hero-box">
-
-<h2>
-Pasang Iklan Baris Gratis Tanpa Daftar
-</h2>
-
-<p>
-Jual barang bekas, properti, kendaraan, jasa, lowongan kerja, hingga kebutuhan harian dengan mudah. Cukup isi formulir dan iklan langsung tayang tanpa registrasi, tanpa biaya, dan tanpa proses yang rumit.
-</p>
-
-<style>
-div.sticky {
-  position: sticky;
-  top: 120;
-}
-</style>
-<div class="sticky">
-<a href="pasang.html" class="hero-btn"> Pasang Iklan </a>
-</div>
-  
-</div>
-
-</section>
-
-<!-- MAIN -->
-
-<main class="main-wrapper">
-
-<!-- SIDEBAR LEFT -->
-
-<aside class="sidebar">
-
-<div class="sidebar-card">
-
-<div class="ads-slot">
-  <a href="https://ajaib.onelink.me/SIjL/cc184m39" target="_blank" rel="noopener noreferrer">
-    <img src="https://raw.githubusercontent.com/joehanz/iklanbaris/refs/heads/main/ajaib.jpg" alt="Iklan Ajaib">
-  </a>
-</div>
-
-</div>
-
-<div class="sidebar-card">
-
-<div class="ads-slot">
-
-300 x 300
-
-</div>
-
-</div>
-
-<div class="sidebar-card">
-
-<div class="ads-slot">
-
-300 x 300
-
-</div>
-
-</div>
-
-</aside>
-
-<!-- CONTENT -->
-
-<section class="content">
-
-<div class="content-box">
-
-<div class="section-header">
-
-<h2>
-Iklan Terbaru
-</h2>
-
-<p>
-Update otomatis dari Google Sheets
-</p>
-
-</div>
-
-<div
-id="loadingBox"
-class="loading-box">
-
-Memuat iklan...
-
-</div>
-
-<div
-id="listIklan"
-class="iklan-grid">
-
-</div>
-
-<div
-id="pagination"
-class="pagination">
-
-</div>
-
-</div>
-
-</section>
-
-<!-- SIDEBAR RIGHT -->
-
-<aside class="sidebar">
-
-<div class="sidebar-card">
-
-<div class="ads-slot">
-
-300 x 300
-
-</div>
-
-</div>
-
-<div class="sidebar-card">
-
-<div class="ads-slot">
-
-300 x 300
-
-</div>
-
-</div>
-
-<div class="sidebar-card">
-
-<div class="ads-slot">
-
-300 x 300
-
-</div>
-
-</div>
-
-</aside>
-
-</main>
-
-<!-- FOOTER -->
-
-<footer class="footer">
-
-<div class="footer-grid">
-
-<div class="footer-card">
-
-<h3>
-Tentang
-</h3>
-
-<p>
-Platform iklan baris gratis
-untuk komunitas dan UMKM.
-</p>
-
-</div>
-
-<div class="footer-card">
-
-<h3>
-Kategori
-</h3>
-
-<ul>
-
-<li>Properti</li>
-<li>Otomotif</li>
-<li>Elektronik</li>
-<li>Jasa</li>
-<li>Peternakan</li>
-
-</ul>
-
-</div>
-
-<div class="footer-card">
-
-<h3>
-Kontak
-</h3>
-
-<p>
-admin@email.com
-</p>
-
-</div>
-
-</div>
-
-<div class="copyright">
-
-© 2026 Iklan Baris Online
-
-</div>
-
-</footer>
-
-<script src="script.js"></script>
-
-  <style>
-.iklan-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-  gap:15px;
-}
-
-.ads{
-  border:1px solid #ddd;
-  padding:10px;
-  border-radius:10px;
-  position:relative;
-  font-family:Arial;
-}
-
-.expired{
-  position:absolute;
-  top:10px;
-  right:10px;
-  background:red;
-  color:#fff;
-  padding:4px 8px;
-  font-size:12px;
-  border-radius:5px;
-}
-
-.timer{
-  margin-top:8px;
-  font-size:13px;
-  color:#b30000;
-}
-</style>
-
-<script>
-const adsData = [
-  {
-    text: "Jual telur ayam kampung & telur asin, grosir ecer, free ongkir SBY Barat",
-    date: "2026-06-01"
-  }
-];
-
-function renderAds(){
-  const container = document.getElementById("listIklan");
-  container.innerHTML = "";
-
-  const now = new Date();
-
-  adsData.forEach((ad) => {
-    const postDate = new Date(ad.date);
-    const diffDays = Math.floor((now - postDate) / (1000*60*60*24));
-
-    const div = document.createElement("div");
-    div.className = "ads";
-
-    let html = `<div>${ad.text}</div>`;
-
-    if(diffDays >= 14){
-      html += `<div class="expired">EXPIRED ADS</div>`;
-    }
-
-    div.innerHTML = html;
-    container.appendChild(div);
-  });
-}
-
-renderAds();
-</script>
-  
-</body>
+    <!-- MAIN -->
+
+    <main class="main-wrapper">
+      <!-- SIDEBAR LEFT -->
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="ads-slot">
+            <a
+              href="https://ajaib.onelink.me/SIjL/cc184m39"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://raw.githubusercontent.com/joehanz/iklanbaris/refs/heads/main/ajaib.jpg"
+                alt="Iklan Ajaib"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="ads-slot">300 x 300</div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="ads-slot">300 x 300</div>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+
+      <section class="content">
+        <div class="content-box">
+          <div class="section-header">
+            <h2>Iklan Terbaru</h2>
+
+            <p>Update otomatis dari Google Sheets</p>
+          </div>
+
+          <div id="loadingBox" class="loading-box">Memuat iklan...</div>
+
+          <div id="listIklan" class="iklan-grid"></div>
+
+          <div id="pagination" class="pagination"></div>
+        </div>
+      </section>
+
+      <!-- SIDEBAR RIGHT -->
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="ads-slot">300 x 300</div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="ads-slot">300 x 300</div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="ads-slot">300 x 300</div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-card">
+          <h3>Tentang</h3>
+
+          <p>Platform iklan baris gratis untuk komunitas dan UMKM.</p>
+        </div>
+
+        <div class="footer-card">
+          <h3>Kategori</h3>
+
+          <ul>
+            <li>Properti</li>
+            <li>Otomotif</li>
+            <li>Elektronik</li>
+            <li>Jasa</li>
+            <li>Peternakan</li>
+          </ul>
+        </div>
+
+        <div class="footer-card">
+          <h3>Kontak</h3>
+
+          <p>admin@email.com</p>
+        </div>
+      </div>
+
+      <div class="copyright">© 2026 Iklan Baris Online</div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <style>
+      .iklan-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+        gap:15px;
+      }
+
+      .ads{
+        border:1px solid #ddd;
+        padding:10px;
+        border-radius:10px;
+        position:relative;
+        font-family:Arial;
+      }
+
+      .expired{
+        position:absolute;
+        top:10px;
+        right:10px;
+        background:red;
+        color:#fff;
+        padding:4px 8px;
+        font-size:12px;
+        border-radius:5px;
+      }
+
+      .timer{
+        margin-top:8px;
+        font-size:13px;
+        color:#b30000;
+      }
+    </style>
+
+    <script>
+      const adsData = [
+        {
+          text: "Jual telur ayam kampung & telur asin, grosir ecer, free ongkir SBY Barat",
+          date: "2026-06-01"
+        }
+      ];
+
+      function renderAds(){
+        const container = document.getElementById("listIklan");
+        container.innerHTML = "";
+
+        const now = new Date();
+
+        adsData.forEach((ad) => {
+          const postDate = new Date(ad.date);
+          const diffDays = Math.floor((now - postDate) / (1000*60*60*24));
+
+          const div = document.createElement("div");
+          div.className = "ads";
+
+          let html = `<div>${ad.text}</div>`;
+
+          if(diffDays >= 14){
+            html += `<div class="expired">EXPIRED ADS</div>`;
+          }
+
+          div.innerHTML = html;
+          container.appendChild(div);
+        });
+      }
+
+      renderAds();
+    </script>
+  </body>
 </html>
