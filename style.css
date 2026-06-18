@@ -425,7 +425,10 @@ var(--primary2)
 
 color:#fff;
 
-padding-top:1000;
+body{
+  padding-top:80px; /* sesuaikan tinggi navbar */
+} 
+   
 padding:
 40px;
 
