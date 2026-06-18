@@ -289,17 +289,15 @@ body{
      MAIN WRAPPER
   ===================================== */
 .main-wrapper{
-      max-width:1600px;
-      margin:25px auto;
-      padding:0 20px;
-      display:grid;
-      grid-template-columns:280px minmax(0,1fr) 280px;
-      gap:20px;
-      align-items:start;
-      border:5px solid red;
-      height:3000px;
-}
+  max-width:1600px;
+  margin:25px auto;
+  padding:0 20px;
 
+  display:flex;
+  gap:20px;
+
+  align-items:flex-start;
+}
 
 
 /* =====================================
@@ -327,8 +325,16 @@ body{
      STICKY ADS
   ===================================== */
 .sidebar{
-     position:sticky !important;
-     top:95px !important;
+  width:280px;
+  flex-shrink:0;
+
+  position:sticky;
+  top:95px;
+}
+
+.content{
+  flex:1;
+  min-width:0;
 }
 
 .ads-slot{
