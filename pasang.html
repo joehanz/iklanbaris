@@ -44,6 +44,42 @@ PASANG IKLAN GRATIS
 
 <form id="adForm">
 
+<div class="form-layout">
+
+<div class="upload-side">
+
+<label class="upload-title">
+Foto Produk
+</label>
+
+<input
+type="file"
+id="imageInput"
+accept="image/*"
+required
+
+>
+
+<p class="help">
+JPG/PNG otomatis diubah ke WebP dan dikompres.
+</p>
+
+<div
+id="previewBox"
+class="preview-box"
+>
+
+<img
+id="previewImage"
+
+>
+
+</div>
+
+</div>
+
+<div class="data-side">
+
 <div class="form-group">
 
 <label>
@@ -55,9 +91,12 @@ type="text"
 id="title"
 maxlength="80"
 required
+
 >
 
 </div>
+
+<div class="form-row">
 
 <div class="form-group">
 
@@ -68,43 +107,21 @@ Kategori
 <select
 id="category"
 required
+
 >
 
 <option value="">
 Pilih Kategori
 </option>
 
-<option>
-Elektronik
-</option>
-
-<option>
-Kendaraan
-</option>
-
-<option>
-Properti
-</option>
-
-<option>
-Lowongan
-</option>
-
-<option>
-Hobi
-</option>
-
-<option>
-Jasa
-</option>
-
-<option>
-Hewan
-</option>
-
-<option>
-Lainnya
-</option>
+<option>Elektronik</option>
+<option>Kendaraan</option>
+<option>Properti</option>
+<option>Lowongan</option>
+<option>Hobi</option>
+<option>Jasa</option>
+<option>Hewan</option>
+<option>Lainnya</option>
 
 </select>
 
@@ -120,7 +137,10 @@ Lokasi
 type="text"
 id="location"
 required
+
 >
+
+</div>
 
 </div>
 
@@ -134,6 +154,7 @@ Nomor WhatsApp
 type="text"
 id="whatsapp"
 required
+
 >
 
 </div>
@@ -161,48 +182,20 @@ class="char-count"
 
 </div>
 
-<div class="form-group">
-
-<label>
-Foto Produk
-</label>
-
-<input
-type="file"
-id="imageInput"
-accept="image/*"
-required
->
-
-<p class="help">
-
-JPG / PNG akan otomatis
-diubah menjadi WebP dan
-dikompres sebelum upload.
-
-</p>
-
 </div>
-
-<div
-id="previewBox"
-class="preview-box"
->
-
-<img
-id="previewImage"
->
 
 </div>
 
 <button
 type="submit"
 class="submit-btn"
+
 >
 
 PASANG IKLAN
 
 </button>
+
 
 </form>
 
