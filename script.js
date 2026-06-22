@@ -1,808 +1,597 @@
-/* =====================================
-   API
-===================================== */
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxNGhXnknPcj-9sAPNVlI8qip35R-ftTbbVCgV5g6LUdSwruMqcPHl_ug69J9AGhv3x/exec";
 
-/* =====================================
-   ELEMENTS
-===================================== */
+const PER_PAGE = 26;
 
-const listIklan =
-document.getElementById("listIklan");
+let allAds = [];
+let filteredAds = [];
+let currentPage = 1;
 
-const loadingBox =
-document.getElementById("loadingBox");
+/* =========================
+LOAD
+========================= */
 
-const searchInput =
-document.getElementById("searchInput");
+document.addEventListener(
+"DOMContentLoaded",
+async ()=>{
 
-const kategoriFilter =
-document.getElementById("kategoriFilter");
+await loadAds();
 
-const pagination =
-document.getElementById("pagination");
+initSearch();
 
-const suggestionBox =
-document.getElementById("suggestionBox");
-
-const menuBtn =
-document.getElementById("menuBtn");
-
-const mobileMenu =
-document.getElementById("mobileMenu");
-
-/* =====================================
-   GLOBAL
-===================================== */
-
-let semuaIklan = [];
-
-let hasilFilter = [];
-
-let halamanAktif = 1;
-
-const iklanPerHalaman = 26;
-
-/* =====================================
-   BURGER MENU
-===================================== */
-
-if(menuBtn){
-
-menuBtn.addEventListener(
-"click",
-()=>{
-
-menuBtn.classList.toggle(
-"active"
-);
-
-mobileMenu.classList.toggle(
-"active"
-);
-
-const span =
-menuBtn.querySelectorAll(
-"span"
-);
-
-if(
-menuBtn.classList.contains(
-"active"
-)
-){
-
-span[0].style.transform =
-"rotate(45deg) translate(6px,6px)";
-
-span[1].style.opacity =
-"0";
-
-span[2].style.transform =
-"rotate(-45deg) translate(5px,-5px)";
-
-}else{
-
-span[0].style.transform =
-"";
-
-span[1].style.opacity =
-"1";
-
-span[2].style.transform =
-"";
-
-}
+initStickyBanner();
 
 }
 );
 
-}
+/* =========================
+LOAD DATA
+========================= */
 
-/* =====================================
-   FORMAT WA
-===================================== */
-
-function formatWA(wa){
-
-wa = String(
-wa || ""
-);
-
-wa =
-wa.replace(
-/\D/g,
-''
-);
-
-if(
-wa.startsWith("0")
-){
-
-wa =
-"62" +
-wa.substring(1);
-
-}
-
-return wa;
-
-}
-
-/* =====================================
-   FORMAT HARGA
-===================================== */
-
-function formatHarga(harga){
-
-return Number(
-harga || 0
-).toLocaleString(
-"id-ID"
-);
-
-}
-
-/* =====================================
-   TIME AGO
-===================================== */
-
-function timeAgo(dateString){
-
-const now = new Date();
-const date = new Date(dateString);
-
-const diff =
-Math.floor(
-(now - date) / 1000
-);
-
-if(diff < 60){
-return `${diff} detik lalu`;
-}
-
-if(diff < 3600){
-return `${Math.floor(diff/60)} menit lalu`;
-}
-
-if(diff < 86400){
-return `${Math.floor(diff/3600)} jam lalu`;
-}
-
-if(diff < 2592000){
-return `${Math.floor(diff/86400)} hari lalu`;
-}
-
-if(diff < 31536000){
-return `${Math.floor(diff/2592000)} bulan lalu`;
-}
-
-return `${Math.floor(diff/31536000)} tahun lalu`;
-
-}
-
-/* =====================================
-   LOAD DATA
-===================================== */
-
-async function loadIklan(){
+async function loadAds(){
 
 try{
 
-const response =
-await fetch(
-API_URL
-);
+const res =
+await fetch(API_URL);
 
 const data =
-await response.json();
+await res.json();
 
-semuaIklan =
-data.reverse();
+allAds =
+Array.isArray(data)
+? data
+: [];
 
-hasilFilter =
-[...semuaIklan];
+filteredAds =
+[...allAds];
 
-if(loadingBox){
+renderHero();
 
-loadingBox.style.display =
-"none";
+renderCategories();
+
+renderAds();
+
+renderLatest();
+
+renderPopular();
+
+}catch(err){
+
+console.error(err);
 
 }
 
-renderHalaman(
-halamanAktif
+}
+
+/* =========================
+HERO RANDOM
+========================= */
+
+function renderHero(){
+
+const hero =
+document.getElementById(
+"hero"
 );
 
-}catch(error){
+if(
+!hero ||
+!allAds.length
+) return;
 
-console.error(
-error
+const random =
+allAds[
+Math.floor(
+Math.random() *
+allAds.length
+)
+];
+
+if(random.image){
+
+hero.style.backgroundImage =
+`url(${random.image})`;
+
+}
+
+}
+
+/* =========================
+SEARCH
+========================= */
+
+function initSearch(){
+
+const input =
+document.getElementById(
+"searchInput"
 );
 
-if(loadingBox){
+const select =
+document.getElementById(
+"categoryFilter"
+);
 
-loadingBox.innerHTML =
-"Gagal memuat data.";
+if(input){
+
+input.addEventListener(
+"input",
+filterAds
+);
+
+}
+
+if(select){
+
+select.addEventListener(
+"change",
+filterAds
+);
 
 }
 
 }
 
+function filterAds(){
+
+const keyword =
+document.getElementById(
+"searchInput"
+).value.toLowerCase();
+
+const category =
+document.getElementById(
+"categoryFilter"
+).value;
+
+filteredAds =
+allAds.filter(ad=>{
+
+const text =
+`
+${ad.title || ""}
+${ad.description || ""}
+`
+.toLowerCase();
+
+const matchKeyword =
+text.includes(keyword);
+
+const matchCategory =
+!category ||
+ad.category === category;
+
+return (
+matchKeyword &&
+matchCategory
+);
+
+});
+
+currentPage = 1;
+
+renderAds();
+
 }
 
-/* =====================================
-   RENDER HALAMAN
-===================================== */
+/* =========================
+KATEGORI
+========================= */
 
-function renderHalaman(page){
+function renderCategories(){
 
-halamanAktif = page;
+const select =
+document.getElementById(
+"categoryFilter"
+);
+
+const sidebar =
+document.getElementById(
+"sidebarCategories"
+);
+
+if(!select) return;
+
+const categories =
+[
+...new Set(
+allAds.map(
+x=>x.category
+)
+)
+]
+.filter(Boolean);
+
+categories.forEach(cat=>{
+
+select.innerHTML +=
+
+`
+<option value="${cat}">
+${cat}
+</option>
+`;
+
+if(sidebar){
+
+sidebar.innerHTML +=
+
+`
+<li>${cat}</li>
+`;
+
+}
+
+});
+
+}
+
+/* =========================
+ADS
+========================= */
+
+function renderAds(){
+
+const wrap =
+document.getElementById(
+"adsContainer"
+);
+
+if(!wrap) return;
 
 const start =
-(page - 1) *
-iklanPerHalaman;
+(currentPage - 1)
+* PER_PAGE;
 
 const end =
-start +
-iklanPerHalaman;
+start + PER_PAGE;
 
-const data =
-hasilFilter.slice(
+const items =
+filteredAds.slice(
 start,
 end
 );
 
-renderCards(data);
+wrap.innerHTML =
+items.map(ad=>{
+
+return `
+
+<div class="ad-card">
+
+<div class="ad-thumb">
+
+<img
+src="${ad.image || ''}"
+loading="lazy"
+>
+
+</div>
+
+<div class="ad-content">
+
+<div class="ad-title">
+
+${safe(ad.title)}
+
+</div>
+
+<div class="ad-desc">
+
+${safe(ad.description)}
+
+</div>
+
+<div class="ad-meta">
+
+<span>
+
+📍
+${safe(ad.location)}
+
+</span>
+
+<span>
+
+🕒
+${formatDate(
+ad.date
+)}
+
+</span>
+
+</div>
+
+<a
+class="ad-whatsapp"
+target="_blank"
+href="https://wa.me/${cleanWA(ad.whatsapp)}"
+>
+
+WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
 
 renderPagination();
 
 }
 
-/* =====================================
-   RENDER CARDS
-===================================== */
-
-function renderCards(data){
-
-listIklan.innerHTML = "";
-
-if(data.length === 0){
-
-listIklan.innerHTML =
-
-`
-<div class="empty-box">
-
-Tidak ada iklan ditemukan.
-
-</div>
-`;
-
-return;
-
-}
-
-data.forEach(item=>{
-
-const wa =
-formatWA(
-item.wa
-);
-
-const harga =
-formatHarga(
-item.harga
-);
-
-const waktu =
-timeAgo(
-item.tanggal
-);
-
-const kategori =
-(item.kategori || "Umum")
-.toUpperCase();
-
-listIklan.innerHTML +=
-
-`
-<div class="card">
-
-<div class="card-badge">
-${kategori}
-</div>
-
-<h3>
-${item.judul || "-"}
-</h3>
-
-<div class="card-price">
-Rp ${harga}
-</div>
-
-<div class="card-user">
-👤 ${item.nama || "Anonim"}
-</div>
-
-<div class="card-time">
-🕒 ${waktu}
-</div>
-
-<div class="card-divider"></div>
-
-<div class="card-desc">
-${item.deskripsi || "-"}
-</div>
-
-<a
-class="card-btn"
-href="https://wa.me/${wa}"
-target="_blank">
-
-Chat PengIklan
-
-</a>
-
-</div>
-`;
-
-});
-
-}
-
-/* =====================================
-   PAGINATION
-===================================== */
+/* =========================
+PAGINATION
+========================= */
 
 function renderPagination(){
 
-pagination.innerHTML = "";
-
-const totalHalaman =
+const totalPages =
 Math.ceil(
-hasilFilter.length /
-iklanPerHalaman
+filteredAds.length /
+PER_PAGE
 );
 
-if(totalHalaman <= 1){
+const pagination =
+document.getElementById(
+"pagination"
+);
+
+if(!pagination) return;
+
+if(totalPages <= 1){
+
+pagination.innerHTML =
+"";
+
 return;
-}
-
-/* tombol prev */
-
-const prev =
-document.createElement(
-"button"
-);
-
-prev.innerHTML = "&lt;";
-
-prev.disabled =
-halamanAktif === 1;
-
-prev.onclick = ()=>{
-
-if(
-halamanAktif > 1
-){
-
-renderHalaman(
-halamanAktif - 1
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
 
 }
 
-};
-
-pagination.appendChild(
-prev
-);
-
-/* nomor halaman */
+let html = "";
 
 for(
 let i = 1;
-i <= totalHalaman;
+i <= totalPages;
 i++
 ){
 
-const btn =
-document.createElement(
-"button"
-);
+html +=
 
-btn.textContent = i;
+`
 
-if(
-i === halamanAktif
-){
+<button
+class="${
+i === currentPage
+? "active"
+: ""
+}"
+onclick="goPage(${i})"
+>
 
-btn.classList.add(
-"active"
-);
+${i}
+
+</button>
+
+`;
 
 }
 
-btn.onclick = ()=>{
+pagination.innerHTML =
+html;
 
-renderHalaman(i);
+}
+
+function goPage(page){
+
+currentPage =
+page;
+
+renderAds();
 
 window.scrollTo({
+
 top:0,
+
 behavior:"smooth"
+
 });
 
-};
+}
 
-pagination.appendChild(
-btn
+/* =========================
+LATEST
+========================= */
+
+function renderLatest(){
+
+const box =
+document.getElementById(
+"latestSidebar"
+);
+
+if(!box) return;
+
+const latest =
+allAds.slice(
+0,
+5
+);
+
+box.innerHTML =
+latest.map(ad=>`
+
+<div
+style="
+display:flex;
+gap:10px;
+margin-bottom:10px;
+"
+>
+
+<img
+src="${ad.image}"
+style="
+width:60px;
+height:60px;
+object-fit:cover;
+"
+>
+
+<div>
+
+${ad.title}
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+/* =========================
+POPULAR
+========================= */
+
+function renderPopular(){
+
+const box =
+document.getElementById(
+"popularSidebar"
+);
+
+if(!box) return;
+
+const popular =
+allAds.slice(
+0,
+5
+);
+
+box.innerHTML =
+popular.map(ad=>`
+
+<div
+style="
+display:flex;
+gap:10px;
+margin-bottom:10px;
+"
+>
+
+<img
+src="${ad.image}"
+style="
+width:60px;
+height:60px;
+object-fit:cover;
+"
+>
+
+<div>
+
+${ad.title}
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+/* =========================
+DATE
+========================= */
+
+function formatDate(date){
+
+if(!date)
+return "";
+
+const d =
+new Date(date);
+
+return d.toLocaleString(
+"id-ID",
+{
+dateStyle:"long",
+timeStyle:"short"
+}
 );
 
 }
 
-/* tombol next */
+/* =========================
+WA
+========================= */
 
-const next =
-document.createElement(
-"button"
+function cleanWA(v){
+
+return String(v || "")
+.replace(/\D/g,'');
+
+}
+
+/* =========================
+SAFE
+========================= */
+
+function safe(v){
+
+return v || "";
+
+}
+
+/* =========================
+STICKY BANNER
+========================= */
+
+function initStickyBanner(){
+
+const hero =
+document.getElementById(
+"hero"
 );
 
-next.innerHTML = "&gt;";
-
-next.disabled =
-halamanAktif ===
-totalHalaman;
-
-next.onclick = ()=>{
+const banner =
+document.getElementById(
+"stickyBanner"
+);
 
 if(
-halamanAktif <
-totalHalaman
-){
+!hero ||
+!banner
+) return;
 
-renderHalaman(
-halamanAktif + 1
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-};
-
-pagination.appendChild(
-next
-);
-
-}
-
-/* =====================================
-   FILTER DATA
-===================================== */
-
-function filterData(){
-
-const keyword =
-(searchInput?.value || "")
-.toLowerCase()
-.trim();
-
-const kategori =
-(kategoriFilter?.value || "")
-.toLowerCase()
-.trim();
-
-hasilFilter =
-semuaIklan.filter(item=>{
-
-const judul =
-(item.judul || "")
-.toLowerCase();
-
-const deskripsi =
-(item.deskripsi || "")
-.toLowerCase();
-
-const nama =
-(item.nama || "")
-.toLowerCase();
-
-const kategoriItem =
-(item.kategori || "")
-.toLowerCase();
-
-const cocokKeyword =
-
-judul.includes(keyword)
-||
-deskripsi.includes(keyword)
-||
-nama.includes(keyword)
-||
-kategoriItem.includes(keyword);
-
-const cocokKategori =
-
-kategori === ""
-||
-kategoriItem === kategori;
-
-return (
-cocokKeyword &&
-cocokKategori
-);
-
-});
-
-halamanAktif = 1;
-
-renderHalaman(
-halamanAktif
-);
-
-}
-
-/* =====================================
-   SEARCH EVENT
-===================================== */
-
-if(searchInput){
-
-searchInput.addEventListener(
-"input",
+window.addEventListener(
+"scroll",
 ()=>{
 
-filterData();
+const rect =
+hero.getBoundingClientRect();
 
-buatSuggestion();
+if(rect.bottom < 0){
 
-}
+banner.classList.add(
+"show"
 );
 
-}
+}else{
 
-/* =====================================
-   CATEGORY EVENT
-===================================== */
-
-if(kategoriFilter){
-
-kategoriFilter.addEventListener(
-"change",
-()=>{
-
-filterData();
-
-}
+banner.classList.remove(
+"show"
 );
-
-}
-
-/* =====================================
-   DATA SUGGESTION
-===================================== */
-
-const daftarSuggestion = [
-
-"properti",
-"tanah",
-"rumah",
-"ruko",
-"kontrakan",
-"kos",
-
-"mobil",
-"motor",
-"sparepart",
-
-"hp",
-"laptop",
-"komputer",
-"tv",
-
-"fashion",
-
-"makanan",
-"minuman",
-"catering",
-
-"ayam",
-"bebek",
-"telur",
-
-"jasa",
-"arsitek",
-"kontraktor",
-"desain",
-"servis",
-
-"lowongan",
-
-"elektronik",
-
-"lainnya"
-
-];
-
-/* =====================================
-   AUTOCOMPLETE
-===================================== */
-
-function buatSuggestion(){
-
-if(!suggestionBox){
-return;
-}
-
-const keyword =
-(searchInput.value || "")
-.toLowerCase()
-.trim();
-
-if(keyword.length < 1){
-
-suggestionBox.style.display =
-"none";
-
-suggestionBox.innerHTML = "";
-
-return;
-
-}
-
-const hasil =
-daftarSuggestion.filter(
-item =>
-item.includes(keyword)
-);
-
-if(hasil.length === 0){
-
-suggestionBox.style.display =
-"none";
-
-suggestionBox.innerHTML = "";
-
-return;
-
-}
-
-suggestionBox.innerHTML = "";
-
-hasil.forEach(item=>{
-
-const div =
-document.createElement(
-"div"
-);
-
-div.className =
-"suggestion-item";
-
-div.textContent =
-item;
-
-div.onclick = ()=>{
-
-searchInput.value =
-item;
-
-suggestionBox.style.display =
-"none";
-
-filterData();
-
-};
-
-suggestionBox.appendChild(
-div
-);
-
-});
-
-suggestionBox.style.display =
-"block";
-
-}
-
-/* =====================================
-   CLOSE SUGGESTION
-===================================== */
-
-document.addEventListener(
-"click",
-(e)=>{
-
-if(
-!e.target.closest(
-".search-wrap"
-)
-){
-
-if(suggestionBox){
-
-suggestionBox.style.display =
-"none";
-
-}
 
 }
 
 }
 );
 
-/* =====================================
-   MOBILE MENU CLOSE
-===================================== */
-
-document.querySelectorAll(
-"#mobileMenu a"
-).forEach(link=>{
-
-link.addEventListener(
-"click",
-()=>{
-
-mobileMenu?.classList.remove(
-"active"
-);
-
-menuBtn?.classList.remove(
-"active"
-);
-
-const span =
-menuBtn?.querySelectorAll(
-"span"
-);
-
-if(span){
-
-span[0].style.transform =
-"";
-
-span[1].style.opacity =
-"1";
-
-span[2].style.transform =
-"";
-
 }
-
-}
-);
-
-});
-
-/* =====================================
-   AUTO REFRESH
-===================================== */
-
-setInterval(()=>{
-
-loadIklan();
-
-},300000);
-
-/*
-300000 ms
-=
-5 menit
-*/
-
-/* =====================================
-   START APP
-===================================== */
-
-loadIklan();
