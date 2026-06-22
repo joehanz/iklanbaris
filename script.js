@@ -1,6 +1,5 @@
 const API_URL =
-"https://script.google.com/macros/s/AKfycbxNGhXnknPcj-9sAPNVlI8qip35R-ftTbbVCgV5g6LUdSwruMqcPHl_ug69J9AGhv3x/exec";
-
+"https://script.google.com/macros/s/AKfycbzwXBjQbOoHjb5btAFrja7llCgXT1KahBrI2-OyrfERGYy2XXkeXJxNNhdKyupqI6TK7w/exec";
 const PER_PAGE = 26;
 
 let allAds = [];
