@@ -594,3 +594,41 @@ banner.classList.remove(
 );
 
 }
+
+
+/* =========================
+MOBILE ADS
+========================= */
+
+function initMobileAds(){
+
+if(window.innerWidth > 768)
+return;
+
+const mobileAds =
+document.getElementById(
+"mobileAds"
+);
+
+if(!mobileAds)
+return;
+
+const ads =
+document.querySelectorAll(
+".left-sidebar .ad300, .right-sidebar .ad300"
+);
+
+ads.forEach(ad=>{
+
+mobileAds.appendChild(
+ad.cloneNode(true)
+);
+
+});
+
+}
+
+window.addEventListener(
+"load",
+initMobileAds
+);
