@@ -93,6 +93,11 @@ color:#fff;
 padding:15px 25px;
 font-weight:bold;
 white-space:nowrap;
+
+position:sticky;
+top:10px;
+z-index:999;
+align-self:flex-start;
 }
 
 /* =========================
