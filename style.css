@@ -746,3 +746,17 @@ height:20px;
 display:block;
 flex-shrink:0;
 }
+
+
+.contact-buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.call-btn,
+.wa-btn{
+display:flex;
+align-items:center;
+gap:6px;
+}
