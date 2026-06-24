@@ -340,7 +340,12 @@ Terima kasih.`
 )}"
 >
 
-🟢
+<img
+src="image/wa.svg"
+class="wa-icon"
+alt="WhatsApp"
+>
+
 <span>WhatsApp</span>
 
 </a>
