@@ -673,8 +673,3 @@ window.addEventListener(
 initMobileAds
 );
 
-.wa-icon{
-width:20px;
-height:20px;
-object-fit:contain;
-}
