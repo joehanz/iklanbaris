@@ -733,3 +733,9 @@ font-weight:bold;
 white-space:nowrap;
   
 }
+
+.wa-icon{
+width:20px;
+height:20px;
+object-fit:contain;
+}
