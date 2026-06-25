@@ -503,38 +503,10 @@ await res.json();
 
 if(result.success){
 
-alert(
-
-"✅ IKLAN BERHASIL DIPASANG\n\n" +
-
-"ID IKLAN:\n" +
-result.id +
-
-"\n\nKODE KELOLA:\n" +
-result.secret_code +
-
-"\n\nSIMPAN KODE INI BAIK-BAIK.\n" +
-"Kami tidak dapat menampilkan kode ini lagi."
-
-);
-
-try{
-
-navigator.clipboard.writeText(
-
-"ID Iklan: " +
-result.id +
-
-"\nKode Kelola: " +
-result.secret_code
-
-);
-
-}catch(err){}
-
 status.innerHTML =
 
 `
+
 <div style="
 padding:15px;
 background:#e8fff0;
@@ -542,23 +514,53 @@ border:2px solid #28a745;
 line-height:1.8;
 ">
 
-✅ Iklan berhasil dipasang
+<b>
+? Iklan berhasil dipasang
+</b>
 
 <br><br>
 
-ID:
-<b>${result.id}</b>
+<b>ID Iklan:</b>
 
 <br>
 
-Kode Kelola:
-<b>${result.secret_code}</b>
+${result.id}
 
 <br><br>
 
-Kode juga telah disalin ke clipboard.
+<b>Kode Kelola:</b>
+
+<br>
+
+<span style="
+font-size:22px;
+font-weight:bold;
+color:#d60000;
+letter-spacing:2px;
+">
+
+${result.secret_code}
+
+</span>
+
+<br><br>
+
+<b>
+Simpan kode ini baik-baik.
+</b>
+
+<br>
+
+Kode diperlukan untuk
+mengedit atau menghapus iklan.
+
+<br>
+
+Kami tidak dapat
+menampilkan kembali kode ini.
 
 </div>
+
 `;
 
 document
@@ -567,9 +569,16 @@ document
 )
 .reset();
 
-imageBase64 = "";
+document
+.getElementById(
+"previewImage"
+)
+.src = "";
 
-}
+count.textContent =
+"0 / 250";
+
+imageBase64 = "";
 
 }else{
 
@@ -583,7 +592,7 @@ background:#fff2f2;
 border:2px solid #dc3545;
 ">
 
-❌ ${result.error}
+? ${result.error}
 
 </div>
 
@@ -624,3 +633,4 @@ err
 
 </body>
 </html>
+
