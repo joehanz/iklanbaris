@@ -34,10 +34,14 @@ try{
 const res =
 await fetch(API_URL);
 
+const data =
+await res.json();
+
 allAds =
 Array.isArray(data)
 ? data.sort((a,b)=>
-new Date(b.date) - new Date(a.date)
+new Date(b.date) -
+new Date(a.date)
 )
 : [];
 
