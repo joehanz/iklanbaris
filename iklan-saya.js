@@ -17,17 +17,13 @@ async ()=>{
 
 const adId =
 document
-.getElementById(
-"adId"
-)
+.getElementById("adId")
 .value
 .trim();
 
 const secretCode =
 document
-.getElementById(
-"secretCode"
-)
+.getElementById("secretCode")
 .value
 .trim();
 
@@ -37,7 +33,6 @@ if(
 ){
 
 resultBox.innerHTML =
-
 `
 <div style="
 padding:15px;
@@ -75,7 +70,6 @@ await res.json();
 if(!data.success){
 
 resultBox.innerHTML =
-
 `
 <div style="
 padding:15px;
@@ -94,7 +88,6 @@ const ad =
 data.ad;
 
 resultBox.innerHTML =
-
 `
 <div style="
 padding:20px;
@@ -112,13 +105,9 @@ margin-bottom:15px;
 border-radius:8px;
 ">
 
-<h3>
-${ad.title}
-</h3>
+<h3>${ad.title}</h3>
 
-<p>
-${ad.description}
-</p>
+<p>${ad.description}</p>
 
 <p>
 <b>Kategori:</b>
@@ -197,7 +186,6 @@ return;
 }
 
 resultBox.innerHTML =
-
 `
 <div style="
 padding:20px;
@@ -205,9 +193,7 @@ background:#d4edda;
 border:1px solid #28a745;
 border-radius:8px;
 ">
-
 ✅ Iklan berhasil dihapus
-
 </div>
 `;
 
@@ -217,6 +203,25 @@ catch(err){
 alert(
 "Gagal terhubung ke server"
 );
+
+}
+
+}
+);
+
+}
+catch(err){
+
+resultBox.innerHTML =
+`
+<div style="
+padding:15px;
+background:#f8d7da;
+border:1px solid #dc3545;
+">
+Gagal terhubung ke server.
+</div>
+`;
 
 }
 
