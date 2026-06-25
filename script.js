@@ -288,7 +288,11 @@ ${safe(ad.title)}
 
 <div class="ad-desc">
 
-${safe(ad.description)}
+/* =========================
+DESKRIPSI + AUTO LINK
+========================= */
+
+${makeLinks(ad.description)}
 
 </div>
 
@@ -676,3 +680,38 @@ window.addEventListener(
 initMobileAds
 );
 
+/* =========================
+AUTO LINK WEBSITE
+Mengubah URL dalam deskripsi
+menjadi link yang bisa diklik
+Contoh:
+https://domain.com
+www.domain.com
+========================= */
+
+function makeLinks(text){
+
+return String(text || "")
+.replace(
+/((https?:\/\/|www\.)[^\s]+)/gi,
+url=>{
+
+const href =
+url.startsWith("http")
+? url
+: "https://" + url;
+
+return `
+<a
+href="${href}"
+target="_blank"
+rel="nofollow noopener"
+>
+${url}
+</a>
+`;
+
+}
+);
+
+}
