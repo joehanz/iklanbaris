@@ -503,6 +503,24 @@ await res.json();
 
 if(result.success){
 
+alert(
+
+"✅ IKLAN BERHASIL DIPASANG\n\n" +
+
+"ID IKLAN:\n" +
+result.id +
+
+"\n\nKODE KELOLA:\n" +
+result.secret_code +
+
+"\n\nSimpan kode ini baik-baik."
+
+);
+
+}
+
+if(result.success){
+
 status.innerHTML =
 
 `
@@ -515,7 +533,7 @@ line-height:1.8;
 ">
 
 <b>
-? Iklan berhasil dipasang
+✅ Iklan berhasil dipasang
 </b>
 
 <br><br>
@@ -563,20 +581,6 @@ menampilkan kembali kode ini.
 
 `;
 
-document
-.getElementById(
-"adForm"
-)
-.reset();
-
-document
-.getElementById(
-"previewImage"
-)
-.src = "";
-
-count.textContent =
-"0 / 250";
 
 imageBase64 = "";
 
@@ -592,7 +596,7 @@ background:#fff2f2;
 border:2px solid #dc3545;
 ">
 
-? ${result.error}
+❌ ${result.error}
 
 </div>
 
