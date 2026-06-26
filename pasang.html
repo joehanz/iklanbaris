@@ -91,39 +91,24 @@
 
 </div>
 
+<a
+href="index.html"
+class="post-btn"
+>
+
+KEMBALI KE BERANDA
+
+</a>
+
 </header>
 
 <div class="form-page">
 
 <div class="form-card">
 
-<div
-class="breadcrumb"
->
-
-🏠
-
-<a href="index.html">
-
-Beranda
-
-</a>
-
-<span>
-
-/</span>
-
-<b>
-
-Pasang Iklan
-
-</b>
-
-</div>
-
 <h2>
 
-FORM PASANG IKLAN GRATIS
+FORM PASANG IKLAN BARIS GRATIS
 
 </h2>
 
@@ -520,7 +505,7 @@ if(result.success){
 
 alert(
 
-"✅ IKLAN BERHASIL DIPASANG\n\n" +
+"? IKLAN BERHASIL DIPASANG\n\n" +
 
 "ID IKLAN:\n" +
 result.id +
@@ -531,6 +516,10 @@ result.secret_code +
 "\n\nSimpan kode ini baik-baik."
 
 );
+
+}
+
+if(result.success){
 
 status.innerHTML =
 
@@ -544,7 +533,7 @@ line-height:1.8;
 ">
 
 <b>
-✅ Iklan berhasil dipasang
+? Iklan berhasil dipasang
 </b>
 
 <br><br>
@@ -592,8 +581,29 @@ menampilkan kembali kode ini.
 
 `;
 
+
 imageBase64 = "";
 
+}else{
+
+status.innerHTML =
+
+`
+
+<div style="
+padding:15px;
+background:#fff2f2;
+border:2px solid #dc3545;
+">
+
+? ${result.error}
+
+</div>
+
+`;
+
+}
+  
 document
 .getElementById(
 "adForm"
@@ -608,24 +618,6 @@ document
 
 count.textContent =
 "0 / 250";
-
-}else{
-
-status.innerHTML =
-
-`
-
-<div style="
-padding:15px;
-background:#fff2f2;
-border:2px solid #dc3545;
-">
-
-❌ ${result.error}
-
-</div>
-
-`;
 
 }
 catch(err){
@@ -645,4 +637,5 @@ err
 
 </body>
 </html>
+
 
