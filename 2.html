@@ -387,12 +387,13 @@ style="margin-top: 15px;"
 
 </main>
 
-  
 <!-- =========================
-RIGHT SIDEBAR & FOOTER SINKRONISASI
+RIGHT SIDEBAR
 ========================= -->
 <aside class="right-sidebar">
-    <div class="ad300">IKLAN 300x300</div>
+    <div class="ad300">
+        IKLAN<br>300x300
+    </div>
     <div class="side-box">
         <h3>INFO</h3>
         <ul class="info-list">
@@ -403,68 +404,101 @@ RIGHT SIDEBAR & FOOTER SINKRONISASI
             <li>Hubungi Kami</li>
         </ul>
     </div>
-    <div class="ad300">IKLAN 300x300</div>
+    <div class="ad300">
+        IKLAN<br>300x300
+    </div>
     <div class="side-box">
         <h3>POPULER</h3>
         <div id="popularSidebar" class="mini-list"></div>
     </div>
 </aside>
+
+</div> <!-- Penutup .page-wrap -->
+
+<!-- =========================
+FOOTER BANNER & FOOTER
+========================= -->
+<div id="mobileAds"></div>
+<div class="footer-banner">
+    BANNER IKLAN FOOTER 728x90
 </div>
 
-<div id="mobileAds"></div>
-<div class="footer-banner">BANNER IKLAN FOOTER 728x90</div>
 <footer class="footer">
     <div class="footer-grid">
-        <div><h4>IKLAN BARIS</h4><p>Situs iklan gratis untuk semua.</p></div>
-        <div><h4>LINK</h4><ul><li>Beranda</li><li>Pasang Iklan</li><li>Kategori</li><li>Hubungi Kami</li></ul></div>
-        <div><h4>BANTUAN</h4><ul><li>Cara Pasang</li><li>Tips Aman</li><li>Kebijakan</li></ul></div>
-        <div><h4>KONTAK</h4><p>info@domain.com</p><p>WhatsApp: 0812-3456-7890</p></div>
+        <div>
+            <h4>IKLAN BARIS</h4>
+            <p>Situs iklan gratis untuk semua.</p>
+        </div>
+        <div>
+            <h4>LINK</h4>
+            <ul>
+                <li>Beranda</li>
+                <li>Pasang Iklan</li>
+                <li>Kategori</li>
+                <li>Hubungi Kami</li>
+            </ul>
+        </div>
+        <div>
+            <h4>BANTUAN</h4>
+            <ul>
+                <li>Cara Pasang</li>
+                <li>Tips Aman</li>
+                <li>Kebijakan</li>
+            </ul>
+        </div>
+        <div>
+            <h4>KONTAK</h4>
+            <p>info@domain.com</p>
+            <p>WhatsApp: 0812-3456-7890</p>
+        </div>
     </div>
 </footer>
 
+<!-- script.js bawaan template 2.html -->
 <script src="script.js"></script>
+
+<!-- TUNGGAL: HANYA ADA SATU BLOK SCRIPT UTAMA UNTUK FORM -->
 <script>
-    /* =========================
-    CONFIG & FIX SCRIPT SPREADSHEET
-    ========================= */
+    // URL Google Apps Script Web App asli dari pasang.html
     const API_URL = "https://google.com";
     
-    // Perbaikan Penghitung Karakter Deskripsi
+    let imageBase64 = "";
     const desc = document.getElementById("description");
     const count = document.getElementById("charCount");
-    if(desc && count) {
+
+    // 1. Penghitung Karakter Deskripsi
+    if (desc && count) {
         desc.addEventListener("input", () => {
             count.textContent = desc.value.length + " / 250";
         });
     }
 
-    // Perbaikan Preview Gambar (Bebas Macet & Korup)
-    let imageBase64 = "";
+    // 2. Handler Pemuatan dan Pratinjau Gambar WebP
     const imageInput = document.getElementById("imageInput");
-    if(imageInput) {
-        imageInput.addEventListener("change", handleImage);
+    if (imageInput) {
+        imageInput.addEventListener("change", async (e) => {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+
+            // Indeks [0] ditambahkan untuk membaca data file pertama
+            const file = files[0]; 
+            const webp = await convertToWebP(file);
+            imageBase64 = webp;
+            
+            const previewImg = document.getElementById("previewImage");
+            if (previewImg) {
+                previewImg.src = webp;
+            }
+        });
     }
 
-    async function handleImage(e){
-        // Ditambahkan indeks [0] agar JavaScript membaca file pertama yang diunggah
-        const file = e.target.files[0]; 
-        if(!file) return;
-
-        const webp = await convertToWebP(file);
-        imageBase64 = webp;
-        
-        const previewImg = document.getElementById("previewImage");
-        if(previewImg) {
-            previewImg.src = webp;
-        }
-    }
-
-    function convertToWebP(file){
-        return new Promise((resolve)=>{
+    // Fungsi Pengonversi Format WebP
+    function convertToWebP(file) {
+        return new Promise((resolve) => {
             const reader = new FileReader();
-            reader.onload = function(ev){
+            reader.onload = function(ev) {
                 const img = new Image();
-                img.onload = function(){
+                img.onload = function() {
                     const canvas = document.createElement("canvas");
                     canvas.width = 200; 
                     canvas.height = 150;
@@ -478,61 +512,59 @@ RIGHT SIDEBAR & FOOTER SINKRONISASI
         });
     }
 
-    // Perbaikan Fungsi Submit Form Iklan Ke Google Apps Script
+    // 3. Handler Pengiriman Form Iklan ke Spreadsheet
     const adForm = document.getElementById("adForm");
-    if(adForm) {
-        adForm.addEventListener("submit", submitAd);
-    }
-
-    async function submitAd(e){
-        e.preventDefault();
-        const status = document.getElementById("statusBox");
-        status.innerHTML = "<div style='padding:10px; background:#fff3cd; color:#856404; border-radius:4px;'>Mengirim iklan ke spreadsheet...</div>";
-        
-        // Payload disinkronkan secara presisi dengan ID Form 2.html Anda
-        const payload = {
-            title: document.getElementById("title").value,
-            category: document.getElementById("category").value,
-            location: document.getElementById("location").value,
-            whatsapp: document.getElementById("whatsapp").value,
-            description: document.getElementById("description").value,
-            image: imageBase64,
-            date: new Date().toISOString()
-        };
-
-        try {
-            const res = await fetch(API_URL, {
-                method: "POST", 
-                body: JSON.stringify(payload)
-            });
-            const result = await res.json();
-            
-            if(result.success){
-                alert(" IKLAN BERHASIL DIPASANG\n\nID: " + result.id + "\n\nKode Kelola: " + result.secret_code);
-                status.innerHTML = `
-                    <div style="padding:15px; background:#e8fff0; border:2px solid #28a745; color:#155724; border-radius:4px; line-height:1.6;">
-                        <b> Iklan Berhasil Dipasang!</b><br>
-                        <strong>ID Iklan:</strong> ${result.id}<br>
-                        <strong>Kode Kelola:</strong> <span style="color:#d60000; font-weight:bold;">${result.secret_code}</span><br>
-                        <small>Simpan kode kelola untuk edit/hapus iklan nanti.</small>
-                    </div>`;
-                
-                // Reset form dan preview setelah sukses mencatat di spreadsheet
-                document.getElementById("adForm").reset();
-                if(document.getElementById("previewImage")) {
-                    document.getElementById("previewImage").src = "";
-                }
-                if(count) {
-                    count.textContent = "0 / 250";
-                }
-                imageBase64 = "";
-            } else {
-                status.innerHTML = `<div style="padding:15px; background:#fff2f2; border:2px solid #dc3545; color:#721c24; border-radius:4px;">Gagal: ${result.error}</div>`;
+    if (adForm) {
+        adForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const status = document.getElementById("statusBox");
+            if (status) {
+                status.innerHTML = "<div style='padding:10px; background:#fff3cd; color:#856404; border-radius:4px; margin-top:10px;'>Mengirim iklan ke spreadsheet...</div>";
             }
-        } catch(err) {
-            status.innerHTML = "<div style='padding:15px; background:#fff2f2; border:2px solid #dc3545; color:#721c24; border-radius:4px;'>Gagal mengirim iklan. Periksa koneksi jaringan atau URL Web App Anda.</div>";
-            console.error(err);
-        }
+            
+            const payload = {
+                title: document.getElementById("title").value,
+                category: document.getElementById("category").value,
+                location: document.getElementById("location").value,
+                whatsapp: document.getElementById("whatsapp").value,
+                description: document.getElementById("description").value,
+                image: imageBase64,
+                date: new Date().toISOString()
+            };
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: "POST", 
+                    body: JSON.stringify(payload)
+                });
+                const result = await res.json();
+                
+                if (result.success) {
+                    alert(" IKLAN BERHASIL DIPASANG\n\nID: " + result.id + "\n\nKode Kelola: " + result.secret_code);
+                    if (status) {
+                        status.innerHTML = `
+                            <div style="padding:15px; background:#e8fff0; border:2px solid #28a745; color:#155724; border-radius:4px; line-height:1.6; margin-top:10px;">
+                                <b> Iklan Berhasil Dipasang!</b><br>
+                                <strong>ID Iklan:</strong> ${result.id}<br>
+                                <strong>Kode Kelola:</strong> <span style="color:#d60000; font-weight:bold;">${result.secret_code}</span><br>
+                                <small>Simpan kode kelola untuk mengedit atau menghapus iklan.</small>
+                            </div>`;
+                    }
+                    
+                    // Reset total formulir input data
+                    adForm.reset();
+                    const previewImg = document.getElementById("previewImage");
+                    if (previewImg) previewImg.src = "";
+                    if (count) count.textContent = "0 / 250";
+                    imageBase64 = "";
+                } else {
+                    if (status) status.innerHTML = `<div style="padding:15px; background:#fff2f2; border:2px solid #dc3545; color:#721c24; border-radius:4px; margin-top:10px;">Gagal: ${result.error}</div>`;
+                }
+            } catch (err) {
+                if (status) status.innerHTML = "<div style='padding:15px; background:#fff2f2; border:2px solid #dc3545; color:#721c24; border-radius:4px; margin-top:10px;'>Gagal mengirim iklan. Periksa URL Web App atau koneksi Anda.</div>";
+                console.error(err);
+            }
+        });
     }
 </script>
 </body>
