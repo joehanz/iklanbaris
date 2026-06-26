@@ -82,6 +82,10 @@ HEADER
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="Cari iklan..." />
 
+        <select id="categoryFilter" style="display:none;">
+          <option value="">Semua Kategori</option>
+        </select>
+
         <button id="searchBtn">Cari</button>
       </div>
 
@@ -113,38 +117,6 @@ MENU
 <a href="#" data-category="Lainnya">Lainnya</a>
 
 </nav>
-
-    <script>
-      document
-.querySelectorAll(".main-menu a")
-.forEach(link=>{
-
-link.addEventListener(
-"click",
-function(e){
-
-e.preventDefault();
-
-const value =
-this.dataset.category;
-
-const select =
-document.getElementById(
-"categoryFilter"
-);
-
-select.value = value;
-
-// jalankan filter yang sudah ada
-select.dispatchEvent(
-new Event("change")
-);
-
-});
-
-});
-
-    </script>
 
     <!-- =========================
 HERO
