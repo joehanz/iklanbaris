@@ -332,7 +332,7 @@ background:#d4edda;
 border:1px solid #28a745;
 border-radius:8px;
 ">
-✅ Iklan berhasil dihapus
+? Iklan berhasil dihapus
 </div>
 `;
 
