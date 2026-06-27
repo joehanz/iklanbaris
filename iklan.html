@@ -11,6 +11,7 @@
     <meta name="theme-color" content="#000000">
     <link rel="canonical" href="https://rewangiklan.my.id/iklan-saya.html">
     <meta name="google-site-verification" content="tw4lMqeQpPnFaLgzP9kkFU64PxgiGxePrDuMbpWDaio">
+    <meta name="google-adsense-account" content="ca-pub-6458870303612779">
 
 <!-- Open Graph -->
 
@@ -364,8 +365,6 @@ FOOTER
 
     <script src="script.js"></script>
     <script>
-
-
 const params =
 new URLSearchParams(location.search);
 
@@ -457,9 +456,7 @@ encodeURIComponent(
 ad.title
 );
 
-document.title =
-ad.title +
-" | Rewang Iklan";
+updateSEO(ad);
 
 })
 
@@ -472,6 +469,96 @@ document.getElementById("loadingBox").style.display="none";
 document.getElementById("errorBox").style.display="block";
 
 });
+
+</script>
+
+    <script>
+
+function updateSEO(ad){
+
+document.title =
+ad.title + " | Rewang Iklan";
+
+const desc =
+ad.description.length > 155
+? ad.description.substring(0,155) + "..."
+: ad.description;
+
+setMeta("description",desc);
+
+setMetaProperty("og:title",ad.title);
+
+setMetaProperty("og:description",desc);
+
+setMetaProperty("og:image",ad.image);
+
+setMetaProperty(
+"og:url",
+location.href
+);
+
+setMeta(
+"twitter:title",
+ad.title
+);
+
+setMeta(
+"twitter:description",
+desc
+);
+
+setMeta(
+"twitter:image",
+ad.image
+);
+
+const canonical =
+document.querySelector("link[rel='canonical']");
+
+if(canonical){
+
+canonical.href =
+location.href;
+
+}
+
+}
+
+function setMeta(name,content){
+
+let tag =
+document.querySelector(
+'meta[name="'+name+'"]'
+);
+
+if(tag){
+
+tag.setAttribute(
+"content",
+content
+);
+
+}
+
+}
+
+function setMetaProperty(property,content){
+
+let tag =
+document.querySelector(
+'meta[property="'+property+'"]'
+);
+
+if(tag){
+
+tag.setAttribute(
+"content",
+content
+);
+
+}
+
+}
 
 </script>
   </body>
