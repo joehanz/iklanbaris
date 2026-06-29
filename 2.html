@@ -233,78 +233,62 @@ CONTENT
 ========================= -->
 
 
-<main class="content">
-
-  <!-- Main form (edit iklan) -->
-  <main id="mainForm">
-    <div class="form-page">
-      <div class="form-card">
-        <div style="padding:25px;">
-          <div class="form-group">
-            <label> ID Iklan </label>
-            <input type="text" id="adId" placeholder="Contoh: IKL000123" />
-          </div>
-
-          <div class="form-group">
-            <label> Kode Kelola </label>
-            <input type="text" id="secretCode" placeholder="Contoh: Q8M7X2KP" />
-          </div>
-
-          <button id="checkBtn" class="submit-btn">TAMPILKAN IKLAN</button>
-          <div id="resultBox" class="status-box" style="margin-top:20px;"></div>
+<!-- Main form -->
+<main id="mainForm">
+  <div class="form-page">
+    <div class="form-card">
+      <div style="padding:25px;">
+        <div class="form-group">
+          <label> ID Iklan </label>
+          <input type="text" id="adId" placeholder="Contoh: IKL000123" />
         </div>
+
+        <div class="form-group">
+          <label> Kode Kelola </label>
+          <input type="text" id="secretCode" placeholder="Contoh: Q8M7X2KP" />
+        </div>
+
+        <button id="checkBtn" class="submit-btn">TAMPILKAN IKLAN</button>
+        <div id="resultBox" class="status-box" style="margin-top:20px;"></div>
       </div>
     </div>
-    <!-- Script khusus edit iklan -->
-    <script>
-      // semua selector dibatasi ke mainForm
-      const formScope = document.getElementById('mainForm');
-      formScope.querySelector('#checkBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        // jalankan logika edit iklan dari iklan-saya.js
-        // pastikan iklan-saya.js hanya akses elemen di mainForm
-        formScope.querySelector('#resultBox').textContent = "Iklan dipanggil untuk diedit";
-
-        // pindah ke mainContent
-        document.getElementById('mainForm').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-      });
-    </script>
-    <script src="iklan-saya.js"></script>
-  </main>
-
-  <!-- Main content (iklan global) -->
-  <main id="mainContent" class="content" style="display:none;">
-    <div class="section-title">IKLAN TERBARU</div>
-    <div id="adsContainer" class="ads-container"></div>
-    <div id="pagination" class="pagination"></div>
-  </main>
-
-  <script>
-    // Scope khusus mainContent
-    const contentScope = document.getElementById('mainContent');
-
-    // Klik menu nav → tampilkan iklan global
-    document.querySelectorAll('nav.main-menu a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('mainForm').style.display = 'none';
-        contentScope.style.display = 'block';
-        contentScope.querySelector('#adsContainer').textContent = "Hasil kategori: " + link.dataset.category;
-      });
-    });
-
-    // Klik tombol search → tampilkan iklan global
-    document.getElementById('searchBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('mainForm').style.display = 'none';
-      contentScope.style.display = 'block';
-      const keyword = document.getElementById('searchInput').value;
-      contentScope.querySelector('#adsContainer').textContent = "Hasil pencarian: " + keyword;
-    });
-  </script>
-
+  </div>
 </main>
+
+<!-- Main content (iklan) -->
+<main id="mainContent" class="content" style="display:none;">
+  <div class="section-title">IKLAN TERBARU</div>
+  <div id="adsContainer" class="ads-container"></div>
+  <div id="pagination" class="pagination"></div>
+</main>
+
+<script>
+  // Klik tombol form → tampilkan iklan, sembunyikan form
+  document.getElementById('checkBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // cegah submit default
+    document.getElementById('mainForm').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+  });
+
+  // Klik menu nav → langsung tampilkan iklan, sembunyikan form
+  document.querySelectorAll('nav.main-menu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // cegah reload halaman
+      document.getElementById('mainForm').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      // di sini bisa tambahkan filter iklan sesuai data-category
+    });
+  });
+
+  // Klik tombol search → langsung tampilkan iklan, sembunyikan form
+  document.getElementById('searchBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // cegah reload halaman
+    document.getElementById('mainForm').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    // di sini bisa jalankan fungsi pencarian
+  });
+</script>
+
 
 
 
