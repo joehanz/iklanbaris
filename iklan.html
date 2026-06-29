@@ -10,7 +10,7 @@
   <meta name="robots" content="index,follow">
   <meta content="Rewang Iklan" name="author"/>
   <meta content="#000000" name="theme-color"/>
-  <link href="https://rewangiklan.my.id/iklan-saya.html" rel="canonical"/>
+  <link rel="canonical" href=""/>
   <meta content="tw4lMqeQpPnFaLgzP9kkFU64PxgiGxePrDuMbpWDaio" name="google-site-verification"/>
   <meta content="ca-pub-6458870303612779" name="google-adsense-account"/>
   <!-- Open Graph -->
@@ -96,6 +96,54 @@
 }
 }
   </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Judul Iklan",
+  "description": "Deskripsi iklan singkat",
+  "image": "https://rewangiklan.my.id/image/no-image.webp",
+  "brand": {
+    "@type": "Brand",
+    "name": "Rewang Iklan"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://rewangiklan.my.id/iklan.html?id=123",
+    "priceCurrency": "IDR",
+    "price": "0",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+  <script type="application/ld+json" id="productSchema"></script>
+<script>
+ const schemaTag = document.getElementById("productSchema");
+if(schemaTag){
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": ad.title,
+    "description": ad.description,
+    "image": ad.image,
+    "brand": {
+      "@type": "Brand",
+      "name": "Rewang Iklan"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": location.href,
+      "priceCurrency": "IDR",
+      "price": ad.price || "0",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+  schemaTag.textContent = JSON.stringify(schemaData);
+}
+
+</script>
  </head>
  <body>
   <!-- =========================
