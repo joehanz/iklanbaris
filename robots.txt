@@ -6,5 +6,6 @@ Disallow: /iklan-saya.html
 Disallow: /pasang.html
 
 # Sitemap lengkap biar Google tahu semua URL
-Sitemap: https://rewangiklan.my.id/sitemap.xml
+Sitemap: https://script.google.com/macros/s/AKfycbzwXBjQbOoHjb5btAFrja7llCgXT1KahBrI2-OyrfERGYy2XXkeXJxNNhdKyupqI6TK7w/exec?action=sitemap
+
 
