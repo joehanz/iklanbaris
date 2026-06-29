@@ -444,6 +444,12 @@ ad.description;
 document.getElementById("adViews").textContent =
 ad.views;
 
+document.getElementById("adPhone").textContent = 
+ad.whatsapp || "-";
+
+document.getElementById("adStatus").textContent = 
+ad.status || "-";
+
 const t =
 new Date(ad.date);
 
