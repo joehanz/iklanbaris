@@ -124,15 +124,3 @@ btn.addEventListener("click", async () => {
       </div>`;
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
