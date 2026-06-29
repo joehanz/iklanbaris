@@ -235,147 +235,65 @@ ADS
 
 function renderAds(){
 
-const wrap =
-document.getElementById(
-"adsContainer"
-);
+  const wrap = document.getElementById("adsContainer");
+  if(!wrap) return;
 
-if(!wrap) return;
+  const start = (currentPage - 1) * PER_PAGE;
+  const end = start + PER_PAGE;
+  const items = filteredAds.slice(start, end);
 
-const start =
-(currentPage - 1)
-* PER_PAGE;
+  wrap.innerHTML = items.map(ad => {
+    const phone = cleanWA(String(ad.whatsapp || ""));
 
-const end =
-start + PER_PAGE;
+    return `
+      <div class="ad-card">
 
-const items =
-filteredAds.slice(
-start,
-end
-);
+        <div class="ad-thumb">
+          <img src="${ad.image || ''}" loading="lazy">
+        </div>
 
-wrap.innerHTML =
-items.map(ad=>{
+        <div class="ad-content">
 
-const phone =
-cleanWA(
-String(
-ad.whatsapp || ""
-)
-);
+          <div class="ad-title">
+            ${safe(ad.title)}
+          </div>
 
-return `
+          <div class="ad-desc">
+            ${makeLinks(ad.description)}
+          </div>
 
-<div class="ad-card">
+          <div class="ad-meta">
+            <span>📍 ${safe(ad.location)}</span>
+            <span>📅 ${formatDate(ad.date)}</span>
+            <span>👁️ ${ad.views} Dilihat</span>
+          </div>
 
-<div class="ad-thumb">
+          <div class="contact-buttons">
+            <a class="call-btn" href="tel:${phone}">
+              📞 <span>Telepon</span>
+            </a>
 
-<img
-src="${ad.image || ''}"
-loading="lazy"
->
+            <a class="wa-btn" target="_blank" href="https://wa.me/${phone}?text=${encodeURIComponent(
+              `Halo.\n\nSaya melihat iklan:\n${safe(ad.title)}\ndi situs:\nhttps://rewangiklan.my.id/\n\nSaya tertarik dan ingin mengetahui informasi lebih lanjut.\n\nTerima kasih.`
+            )}">
+              <img src="image/wa.svg" class="wa-icon" alt="WhatsApp">
+              <span>WhatsApp</span>
+            </a>
 
-</div>
+            <a class="manage-btn" href="iklan-saya.html">
+              ⚙️ <span>Kelola</span>
+            </a>
+          </div>
 
-<div class="ad-content">
+        </div>
 
-<div class="ad-title">
+      </div>
+    `;
+  }).join("");
 
-${safe(ad.title)}
-
-</div>
-
-<div class="ad-desc">
-
-${makeLinks(ad.description)}
-
-</div>
-
-<div class="ad-meta">
-
-<span>
-
-📍 
-${safe(ad.location)}
-
-</span>
-
-<span>
-
-📅
-${formatDate(
-ad.date
-)}
-
-</span>
-
-</div>
-
-<div class="contact-buttons">
-
-<a
-class="call-btn"
-href="tel:${phone}"
->
-
-📞
-<span>Telepon</span>
-
-</a>
-
-<a
-class="wa-btn"
-target="_blank"
-href="https://wa.me/${phone}?text=${encodeURIComponent(
-`Halo.
-
-Saya melihat iklan:
-
-${safe(ad.title)}
-
-di situs:
-https://rewangiklan.my.id/
-
-Saya tertarik dan ingin mengetahui informasi lebih lanjut.
-
-Terima kasih.`
-)}"
->
-
-<img
-src="image/wa.svg"
-class="wa-icon"
-alt="WhatsApp"
->
-
-<span>WhatsApp</span>
-
-</a>
-
-<a
-class="manage-btn"
-href="iklan-saya.html"
->
-
-⚙️
-<span>Kelola</span>
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-renderPagination();
-
+  renderPagination();
 }
+
 
 /* =========================
 PAGINATION
