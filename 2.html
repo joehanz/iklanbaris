@@ -235,62 +235,60 @@ CONTENT
       <main class="content">
        
 
-       <!-- Wadah iklan, default disembunyikan -->
-<div id="adsContainer" class="ads-container" style="display:none;">
-  <p>Ini area iklan</p>
-</div>
+       <!-- Main form -->
+<main id="mainForm">
+  <div class="form-page">
+    <div class="form-card">
+      <div style="padding:25px;">
+        <div class="form-group">
+          <label> ID Iklan </label>
+          <input type="text" id="adId" placeholder="Contoh: IKL000123" />
+        </div>
 
-<!-- Form input, default tampil -->
-<div id="formContainer" class="form-page">
-  <div class="form-card">
-    <div style="padding:25px;">
-      <div class="form-group">
-        <label> ID Iklan </label>
-        <input type="text" id="adId" placeholder="Contoh: IKL000123" />
+        <div class="form-group">
+          <label> Kode Kelola </label>
+          <input type="text" id="secretCode" placeholder="Contoh: Q8M7X2KP" />
+        </div>
+
+        <button id="checkBtn" class="submit-btn">TAMPILKAN IKLAN</button>
+        <div id="resultBox" class="status-box" style="margin-top:20px;"></div>
       </div>
-
-      <div class="form-group">
-        <label> Kode Kelola </label>
-        <input type="text" id="secretCode" placeholder="Contoh: Q8M7X2KP" />
-      </div>
-
-      <button id="checkBtn" class="submit-btn">TAMPILKAN IKLAN</button>
-
-      <div id="resultBox" class="status-box" style="margin-top:20px;"></div>
     </div>
   </div>
-</div>
+</main>
 
-<script src="iklan-saya.js"></script>
-
-<style>
-  /* CSS overlay untuk adsContainer */
-  .ads-container {
-    position: fixed;   /* tempel di layar */
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: white;
-    z-index: 9999;
-    display: none;     /* default sembunyi */
-  }
-</style>
+<!-- Main content (iklan) -->
+<main id="mainContent" class="content" style="display:none;">
+  <div class="section-title">IKLAN TERBARU</div>
+  <div id="adsContainer" class="ads-container"></div>
+  <div id="pagination" class="pagination"></div>
+</main>
 
 <script>
-  // Default: iklan tidak aktif
-  let adsEnabled = false;
-
-  // Event: klik tombol untuk memanggil iklan
+  // Klik tombol form → tampilkan iklan, sembunyikan form
   document.getElementById('checkBtn').addEventListener('click', function() {
-    adsEnabled = true; // ubah status jadi aktif
+    document.getElementById('mainForm').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+  });
 
-    if (adsEnabled) {
-      // tampilkan iklan
-      document.getElementById('adsContainer').style.display = 'block';
-      // sembunyikan form
-      document.getElementById('formContainer').style.display = 'none';
-    }
+  // Klik menu nav → langsung tampilkan iklan, sembunyikan form
+  document.querySelectorAll('nav.main-menu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // cegah reload halaman
+      document.getElementById('mainForm').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      // di sini bisa tambahkan filter iklan sesuai data-category
+    });
+  });
+
+  // Klik tombol search → langsung tampilkan iklan, sembunyikan form
+  document.getElementById('searchBtn').addEventListener('click', function() {
+    document.getElementById('mainForm').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    // di sini bisa jalankan fungsi pencarian
   });
 </script>
+
  
 
         
