@@ -233,7 +233,19 @@ CONTENT
 ========================= -->
 
       <main class="content">
+<style>
+  .ads-container {
+  position: fixed;       /* tempel di layar */
+  top: 0;
+  left: 0;
+  width: 100%;           /* penuh layar */
+  height: 100%;          /* penuh layar */
+  background: white;     /* latar belakang iklan */
+  z-index: 9999;         /* pastikan di atas form */
+  display: none;         /* default disembunyikan */
+}
 
+</style>
   <!-- Wadah iklan, default disembunyikan -->
   <div id="adsContainer" class="ads-container" style="display:none;">
     <p>Ini area iklan</p>
