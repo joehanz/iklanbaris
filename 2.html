@@ -256,6 +256,20 @@ CONTENT
       </div>
     </div>
     <!-- Script khusus edit iklan -->
+    <script>
+      // semua selector dibatasi ke mainForm
+      const formScope = document.getElementById('mainForm');
+      formScope.querySelector('#checkBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // jalankan logika edit iklan dari iklan-saya.js
+        // pastikan iklan-saya.js hanya akses elemen di mainForm
+        formScope.querySelector('#resultBox').textContent = "Iklan dipanggil untuk diedit";
+
+        // pindah ke mainContent
+        document.getElementById('mainForm').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+      });
+    </script>
     <script src="iklan-saya.js"></script>
   </main>
 
@@ -267,33 +281,31 @@ CONTENT
   </main>
 
   <script>
-    // Klik tombol form → tampilkan iklan global, sembunyikan form
-    document.getElementById('checkBtn').addEventListener('click', function(e) {
-      e.preventDefault(); // cegah submit default
-      document.getElementById('mainForm').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-    });
+    // Scope khusus mainContent
+    const contentScope = document.getElementById('mainContent');
 
-    // Klik menu nav → langsung tampilkan iklan global
+    // Klik menu nav → tampilkan iklan global
     document.querySelectorAll('nav.main-menu a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
         document.getElementById('mainForm').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-        // filter iklan sesuai data-category bisa ditaruh di sini
+        contentScope.style.display = 'block';
+        contentScope.querySelector('#adsContainer').textContent = "Hasil kategori: " + link.dataset.category;
       });
     });
 
-    // Klik tombol search → langsung tampilkan iklan global
+    // Klik tombol search → tampilkan iklan global
     document.getElementById('searchBtn').addEventListener('click', function(e) {
       e.preventDefault();
       document.getElementById('mainForm').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-      // jalankan fungsi pencarian di sini
+      contentScope.style.display = 'block';
+      const keyword = document.getElementById('searchInput').value;
+      contentScope.querySelector('#adsContainer').textContent = "Hasil pencarian: " + keyword;
     });
   </script>
 
 </main>
+
 
 
       
