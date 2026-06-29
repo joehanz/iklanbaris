@@ -234,37 +234,52 @@ CONTENT
 
       <main class="content">
 
-        <div class="form-page">
-        <div class="form-card">
-          <div style="padding:25px;">
-            <div class="form-group">
-              <label> ID Iklan </label>
+        <!-- Wadah iklan, default disembunyikan -->
+<div id="adsContainer" class="ads-container" style="display:none;">
+  <!-- konten iklan bisa dimasukkan di sini -->
+</div>
 
-              <input type="text" id="adId" placeholder="Contoh: IKL000123" />
-            </div>
-
-            <div class="form-group">
-              <label> Kode Kelola </label>
-
-              <input
-                type="text"
-                id="secretCode"
-                placeholder="Contoh: Q8M7X2KP"
-              />
-            </div>
-
-            <button id="checkBtn" class="submit-btn">TAMPILKAN IKLAN</button>
-
-            <div
-              id="resultBox"
-              class="status-box"
-              style="margin-top:20px;"
-            ></div>
-          </div>
-        </div>
+<!-- Form input, default ditampilkan -->
+<div id="formContainer" class="form-page">
+  <div class="form-card">
+    <div style="padding:25px;">
+      <div class="form-group">
+        <label> ID Iklan </label>
+        <input type="text" id="adId" placeholder="Contoh: IKL000123" />
       </div>
 
-      <script src="iklan-saya.js"></script>
+      <div class="form-group">
+        <label> Kode Kelola </label>
+        <input type="text" id="secretCode" placeholder="Contoh: Q8M7X2KP" />
+      </div>
+
+      <button id="checkBtn" class="submit-btn">TAMPILKAN IKLAN</button>
+
+      <div id="resultBox" class="status-box" style="margin-top:20px;"></div>
+    </div>
+  </div>
+</div>
+
+<script src="iklan-saya.js"></script>
+
+<script>
+  // Variabel logika: true = tampilkan ads, false = tampilkan form
+  const adsEnabled = false; 
+
+  // Cek kondisi adsEnabled
+  if (adsEnabled) {
+    // Jika ads aktif: tampilkan div adsContainer
+    document.getElementById('adsContainer').style.display = 'block';
+    // Sembunyikan form
+    document.getElementById('formContainer').style.display = 'none';
+  } else {
+    // Jika ads tidak aktif: sembunyikan div adsContainer
+    document.getElementById('adsContainer').style.display = 'none';
+    // Tampilkan form
+    document.getElementById('formContainer').style.display = 'block';
+  }
+</script>
+
         
       </main>
 
