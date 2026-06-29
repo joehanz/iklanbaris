@@ -1,8 +1,10 @@
 User-agent: *
-
 Allow: /
 
+# Halaman internal/form jangan diindeks
 Disallow: /iklan-saya.html
 Disallow: /pasang.html
 
+# Sitemap lengkap biar Google tahu semua URL
 Sitemap: https://rewangiklan.my.id/sitemap.xml
+
