@@ -245,6 +245,12 @@ function renderAds(){
   wrap.innerHTML = items.map(ad => {
     const phone = cleanWA(String(ad.whatsapp || ""));
 
+    // bikin shortDesc max 250 karakter + link baca lagi
+    let desc = ad.description || "";
+    let shortDesc = desc.length > 250 
+      ? makeLinks(desc.substring(0,250)) + '... <a href="iklan.html?id=' + ad.id + '">Baca lagi</a>'
+      : makeLinks(desc);
+
     return `
       <div class="ad-card">
 
@@ -259,7 +265,7 @@ function renderAds(){
           </div>
 
           <div class="ad-desc">
-            ${makeLinks(ad.description)}
+            ${shortDesc}
           </div>
 
           <div class="ad-meta">
