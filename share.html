@@ -2,11 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Share Iklan</title>
-
-  <!-- OPEN GRAPH (WA/FB PREVIEW) -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rewang Iklan">
   <meta property="og:locale" content="id_ID">
@@ -16,17 +12,20 @@
   <meta property="og:url" content="">
   <meta property="og:image" content="">
 
-  <!-- TWITTER -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="">
-  <meta name="twitter:description" content="">
-  <meta name="twitter:image" content="">
 
-  <!-- AUTO REDIRECT (USER BUKA LINK) -->
-  <meta http-equiv="refresh" content="0;url=https://rewangiklan.my.id/iklan.html?id=">
+  <title>Share Iklan</title>
+
+  <script>
+  const id = new URLSearchParams(location.search).get("id");
+  if(id){
+    setTimeout(() => {
+      location.href = "https://rewangiklan.my.id/iklan.html?id=" + id;
+    }, 3000);
+  }
+  </script>
 
 </head>
-
 <body>
 Loading...
 </body>
