@@ -184,69 +184,9 @@ LAYOUT
   </a>
 
   <a class="share-fb" target="_blank" id="fbShare" href="#">
-    <svg viewBox="0 0 32 32" class="icon">
-      <path fill="currentColor" d="M18 6h3V2h-3c-3.3 0-6 2.7-6 6v3H9v4h3v10h4V15h3l1-4h-4V8c0-1.1.9-2 2-2z"/>
-    </svg>
-    Facebook
+    <img src="https://raw.githubusercontent.com/joehanz/rewangiklan/refs/heads/main/image/imageedit_4_4931406454.png" style="width:40; height:40;">
   </a>
 
-       <style>
-         .share-buttons{
-  display:flex;
-  gap:12px;
-  margin-top:15px;
-}
-
-.share-btn{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:10px 14px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:600;
-  color:#fff;
-  font-family:Arial, sans-serif;
-  transition:0.2s;
-}
-
-.share-btn svg.icon{
-  width:18px;
-  height:18px;
-  fill:currentColor;
-}
-
-.share-btn.wa{
-  background:#25D366;
-}
-
-.share-btn.fb{
-  background:#1877F2;
-}
-
-.share-btn:hover{
-  transform:scale(1.03);
-  opacity:0.9;
-}
-       </style>
-
-       <script>
-         const id = new URLSearchParams(location.search).get("id");
-
-if(id){
-
-  const shareUrl = `https://rewangiklan.my.id/share.html?id=${id}`;
-
-  document.getElementById("waShare").href =
-    "https://wa.me/?text=" + encodeURIComponent(shareUrl);
-
-  document.getElementById("fbShare").href =
-    "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
-
-}
-       </script>
 
 </div>
 
