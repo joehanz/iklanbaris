@@ -291,6 +291,44 @@ LAYOUT
       <b>Telepon</b>
       <p id="adPhone">-</p>
      </div>
+     <br><hr>
+          <br><hr>
+     
+     <div class="share-buttons">
+
+  <a class="share-wa" target="_blank"
+     id="waShare">
+    📲 Share WhatsApp
+  </a>
+
+  <a class="share-fb" target="_blank"
+     id="fbShare">
+    📘 Share Facebook
+  </a>
+
+</div>
+
+<script>
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+const wa = document.getElementById("waShare");
+const fb = document.getElementById("fbShare");
+
+if (id && wa && fb) {
+
+  const shareUrl = `https://rewangiklan.my.id/share.html?id=${id}`;
+
+  wa.href = "https://wa.me/?text=" + encodeURIComponent(shareUrl);
+
+  fb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
+
+} else {
+  console.log("Share disabled: missing id or elements");
+}
+</script>
+</script>
 
 
 
