@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<meta id="og-title" property="og:title" content="Loading...">
+<meta id="og-desc" property="og:description" content="Loading...">
+<meta id="og-image" property="og:image" content="">
+<meta id="og-url" property="og:url" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Share Iklan</title>
+
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+const api = "https://script.google.com/macros/s/AKfycbXXXX/exec?action=detail&id=" + id;
+
+fetch(api)
+.then(r => r.json())
+.then(res => {
+
+  if(!res.success) return;
+
+  const ad = res.ad;
+
+  const url = "https://rewangiklan.my.id/iklan.html?id=" + ad.id;
+
+  document.title = ad.title;
+
+  document.getElementById("og-title").setAttribute("content", ad.title);
+  document.getElementById("og-desc").setAttribute("content", ad.description);
+  document.getElementById("og-image").setAttribute("content", ad.image);
+  document.getElementById("og-url").setAttribute("content", url);
+
+  // redirect user
+  setTimeout(()=>{
+    location.href = url;
+  }, 500);
+
+});
+</script>
+
+</head>
+
+<body>
+Loading...
+</body>
+</html>
