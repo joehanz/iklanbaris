@@ -144,6 +144,25 @@ if(schemaTag){
 }
 
 </script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // ambil data iklan dari script detail (pastikan variabel ad sudah ada)
+  if(typeof ad !== "undefined"){
+    // update OG tags
+    document.querySelector('meta[property="og:title"]').setAttribute("content", ad.title);
+    document.querySelector('meta[property="og:description"]').setAttribute("content", ad.description);
+    document.querySelector('meta[property="og:image"]').setAttribute("content", ad.image || "https://rewangiklan.my.id/image/no-image.webp");
+    document.querySelector('meta[property="og:url"]').setAttribute("content", location.href);
+
+    // update Twitter tags
+    document.querySelector('meta[name="twitter:title"]').setAttribute("content", ad.title);
+    document.querySelector('meta[name="twitter:description"]').setAttribute("content", ad.description);
+    document.querySelector('meta[name="twitter:image"]').setAttribute("content", ad.image || "https://rewangiklan.my.id/image/no-image.webp");
+  }
+});
+</script>
+
  </head>
  <body>
   <!-- =========================
@@ -272,7 +291,19 @@ LAYOUT
       <b>Telepon</b>
       <p id="adPhone">-</p>
      </div>
-     
+     <br><hr>
+     <div class="share-buttons">
+  <a class="share-wa" target="_blank" 
+     href="https://wa.me/?text=${encodeURIComponent(ad.title + ' - ' + ad.description + '\n\n' + window.location.href)}">
+    📲 Share WhatsApp
+  </a>
+
+  <a class="share-fb" target="_blank" 
+     href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}">
+    📘 Share Facebook
+  </a>
+</div>
+
     </div>
   </div>
 </div></div> 
