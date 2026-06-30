@@ -308,25 +308,7 @@ LAYOUT
 </div>
 
 
-<script>
-const params = new URLSearchParams(location.search);
-const id = params.get("id");
 
-const wa = document.getElementById("waShare");
-const fb = document.getElementById("fbShare");
-
-if (id && wa && fb) {
-
-  const shareUrl = `https://rewangiklan.my.id/share.html?id=${id}`;
-
-  wa.href = "https://wa.me/?text=" + encodeURIComponent(shareUrl);
-
-  fb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
-
-} else {
-  console.log("Share disabled: missing id or elements");
-}
-</script>
 
 
 
@@ -643,5 +625,26 @@ content
 
 }
   </script>
+
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+const wa = document.getElementById("waShare");
+const fb = document.getElementById("fbShare");
+
+if (id && wa && fb) {
+
+  const shareUrl = `https://rewangiklan.my.id/share.html?id=${id}`;
+
+  wa.href = "https://wa.me/?text=" + encodeURIComponent(shareUrl);
+
+  fb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
+
+} else {
+  console.log("Share disabled: missing id or elements");
+}
+</script>
+  
  </body>
 </html>
