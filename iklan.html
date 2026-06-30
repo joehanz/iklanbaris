@@ -295,13 +295,11 @@ LAYOUT
      
      <div class="share-buttons">
 
-  <a class="share-wa" target="_blank"
-     id="waShare">
+  <a class="share-wa" target="_blank" id="waShare" href="#">
     📲 Share WhatsApp
   </a>
 
-  <a class="share-fb" target="_blank"
-     id="fbShare">
+  <a class="share-fb" target="_blank" id="fbShare" href="#">
     📘 Share Facebook
   </a>
 
@@ -627,23 +625,21 @@ content
   </script>
 
 <script>
-const params = new URLSearchParams(location.search);
-const id = params.get("id");
+document.addEventListener("DOMContentLoaded", () => {
 
-const wa = document.getElementById("waShare");
-const fb = document.getElementById("fbShare");
+  const id = new URLSearchParams(location.search).get("id");
 
-if (id && wa && fb) {
+  const wa = document.getElementById("waShare");
+  const fb = document.getElementById("fbShare");
+
+  if (!id || !wa || !fb) return;
 
   const shareUrl = `https://rewangiklan.my.id/share.html?id=${id}`;
 
-  wa.href = "https://wa.me/?text=" + encodeURIComponent(shareUrl);
+  wa.setAttribute("href", "https://wa.me/?text=" + encodeURIComponent(shareUrl));
+  fb.setAttribute("href", "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl));
 
-  fb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
-
-} else {
-  console.log("Share disabled: missing id or elements");
-}
+});
 </script>
   
  </body>
