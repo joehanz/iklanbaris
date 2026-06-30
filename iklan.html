@@ -291,18 +291,21 @@ LAYOUT
       <b>Telepon</b>
       <p id="adPhone">-</p>
      </div>
-     <br><hr>123455
+     <br><hr>6787778
      <div class="share-buttons">
-  <a class="share-wa" target="_blank" 
-     href="https://wa.me/?text=${encodeURIComponent(ad.title + ' - ' + ad.description + '\n\n' + location.href)}">
+  <a class="share-wa" target="_blank"
+     href="https://wa.me/?text="
+     onclick="this.href='https://wa.me/?text='+encodeURIComponent(ad.title + ' - ' + ad.description + '\n\n' + location.href)">
     📲 Share WhatsApp
   </a>
 
-  <a class="share-fb" target="_blank" 
-     href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}">
+  <a class="share-fb" target="_blank"
+     href="https://www.facebook.com/sharer/sharer.php?u="
+     onclick="this.href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)">
     📘 Share Facebook
   </a>
 </div>
+
 
 
     </div>
