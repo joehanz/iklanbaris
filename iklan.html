@@ -617,5 +617,16 @@ content
 
 }
   </script>
+  <script>
+   function shareWA(id){
+  const url = `https://rewangiklan.my.id/share.html?id=${id}`;
+  window.open("https://wa.me/?text=" + encodeURIComponent(url));
+}
+
+function shareFB(id){
+  const url = `https://rewangiklan.my.id/share.html?id=${id}`;
+  window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url));
+}
+  </script>
  </body>
 </html>
