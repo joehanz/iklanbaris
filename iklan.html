@@ -317,6 +317,40 @@ document.getElementById("fbShare").href =
   "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
 </script>
 
+     <script>
+      const id = new URLSearchParams(location.search).get("id");
+
+const api = `https://script.google.com/macros/s/AKfycbXXXX/exec?action=detail&id=${id}`;
+
+fetch(api)
+  .then(r => r.json())
+  .then(res => {
+
+    if(!res.success){
+      document.getElementById("errorBox").style.display = "block";
+      return;
+    }
+
+    const ad = res.ad;
+
+    document.getElementById("adCategory").innerText = ad.category;
+    document.getElementById("adCategory2").innerText = ad.category;
+    document.getElementById("adLocation").innerText = ad.location;
+    document.getElementById("adDescription").innerText = ad.description;
+    document.getElementById("adStatus").innerText = ad.status;
+    document.getElementById("adViews").innerText = ad.views;
+    document.getElementById("adDate").innerText = ad.date;
+    document.getElementById("adPhone").innerText = ad.whatsapp;
+
+    document.getElementById("adImage").src = ad.image;
+
+  })
+  .catch(err => {
+    console.log(err);
+    document.getElementById("errorBox").style.display = "block";
+  });
+     </script>
+
 
 
 
