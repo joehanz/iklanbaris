@@ -13,34 +13,29 @@
 <title>Share Iklan</title>
 
 <script>
-const params = new URLSearchParams(location.search);
-const id = params.get("id");
+const id = new URLSearchParams(location.search).get("id");
 
 const api = "https://script.google.com/macros/s/AKfycbXXXX/exec?action=detail&id=" + id;
 
 fetch(api)
-.then(r => r.json())
-.then(res => {
+  .then(r => r.json())
+  .then(res => {
 
-  if(!res.success) return;
+    if(!res.success){
+      document.body.innerHTML = "Iklan tidak ditemukan";
+      return;
+    }
 
-  const ad = res.ad;
+    const ad = res.ad;
 
-  const url = "https://rewangiklan.my.id/iklan.html?id=" + ad.id;
+    document.getElementById("title").innerText = ad.title;
+    document.getElementById("desc").innerText = ad.description;
+    document.getElementById("img").src = ad.image;
 
-  document.title = ad.title;
-
-  document.getElementById("og-title").setAttribute("content", ad.title);
-  document.getElementById("og-desc").setAttribute("content", ad.description);
-  document.getElementById("og-image").setAttribute("content", ad.image);
-  document.getElementById("og-url").setAttribute("content", url);
-
-  // redirect user
-  setTimeout(()=>{
-    location.href = url;
-  }, 500);
-
-});
+  })
+  .catch(() => {
+    document.body.innerHTML = "Gagal memuat data";
+  });
 </script>
 
 </head>
