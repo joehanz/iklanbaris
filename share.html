@@ -1,42 +1,29 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta id="og-title" property="og:title" content="Loading...">
-<meta id="og-desc" property="og:description" content="Loading...">
-<meta id="og-image" property="og:image" content="">
-<meta id="og-url" property="og:url" content="">
+  <title>Share Iklan</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- OPEN GRAPH (WA/FB PREVIEW) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rewang Iklan">
+  <meta property="og:locale" content="id_ID">
 
-<title>Share Iklan</title>
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
 
-<script>
-const id = new URLSearchParams(location.search).get("id");
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
 
-const api = "https://script.google.com/macros/s/AKfycbXXXX/exec?action=detail&id=" + id;
-
-fetch(api)
-  .then(r => r.json())
-  .then(res => {
-
-    if(!res.success){
-      document.body.innerHTML = "Iklan tidak ditemukan";
-      return;
-    }
-
-    const ad = res.ad;
-
-    document.getElementById("title").innerText = ad.title;
-    document.getElementById("desc").innerText = ad.description;
-    document.getElementById("img").src = ad.image;
-
-  })
-  .catch(() => {
-    document.body.innerHTML = "Gagal memuat data";
-  });
-</script>
+  <!-- AUTO REDIRECT (USER BUKA LINK) -->
+  <meta http-equiv="refresh" content="0;url=https://rewangiklan.my.id/iklan.html?id=">
 
 </head>
 
