@@ -291,8 +291,8 @@ LAYOUT
       <b>Telepon</b>
       <p id="adPhone">-</p>
      </div>
-     <br><hr>6767676767
-     <div class="share-buttons">
+     <br><hr>mmmmmmmmmmmmm
+  masih loading terus. saya curiga script ini yg bikin bentrok <div class="share-buttons">
 
   <a class="share-wa" target="_blank"
      id="waShare">
@@ -305,6 +305,18 @@ LAYOUT
   </a>
 
 </div>
+
+<script>
+const id = new URLSearchParams(location.search).get("id");
+const shareUrl = `https://rewangiklan.my.id/share.html?id=${id}`;
+
+document.getElementById("waShare").href =
+  "https://wa.me/?text=" + encodeURIComponent(shareUrl);
+
+document.getElementById("fbShare").href =
+  "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
+</script>
+
 
 
      
