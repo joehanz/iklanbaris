@@ -291,21 +291,31 @@ LAYOUT
       <b>Telepon</b>
       <p id="adPhone">-</p>
      </div>
-     <br><hr>555555
+     <br><hr>8888888
      <div class="share-buttons">
+
   <a class="share-wa" target="_blank"
-     href="https://wa.me/?text="
-     onclick="this.href='https://wa.me/?text='+encodeURIComponent(ad.title + ' - ' + ad.description + '\n\n' + location.href)">
+     id="waShare">
     📲 Share WhatsApp
   </a>
 
   <a class="share-fb" target="_blank"
-     href="https://www.facebook.com/sharer/sharer.php?u="
-     onclick="this.href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)">
+     id="fbShare">
     📘 Share Facebook
   </a>
+
 </div>
 
+<script>
+const id = new URLSearchParams(location.search).get("id");
+const shareUrl = `https://rewangiklan.my.id/share.html?id=${id}`;
+
+document.getElementById("waShare").href =
+  "https://wa.me/?text=" + encodeURIComponent(shareUrl);
+
+document.getElementById("fbShare").href =
+  "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
+</script>
 
 
 
@@ -615,17 +625,6 @@ content
 
 }
 
-}
-  </script>
-  <script>
-   function shareWA(id){
-  const url = `https://rewangiklan.my.id/share.html?id=${id}`;
-  window.open("https://wa.me/?text=" + encodeURIComponent(url));
-}
-
-function shareFB(id){
-  const url = `https://rewangiklan.my.id/share.html?id=${id}`;
-  window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url));
 }
   </script>
  </body>
